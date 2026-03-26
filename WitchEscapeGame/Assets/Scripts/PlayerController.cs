@@ -3,190 +3,122 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Grid Setup")]
-    public Transform[] gridPoints; // Assign 9 points in inspector
-    private Transform[,] grid = new Transform[3, 3];
-
     [Header("Movement")]
-    public float moveDuration = 0.15f;
-    private int gridX = 1;
-    private int gridY = 1;
-    private bool isMoving;
-
-    [Header("Shake")]
-    public float shakeAmount = 0.15f;
-    public float shakeTime = 0.2f;
+    public Rigidbody2D rb;
+    public float upwardSpeed = 6f;
+    public float gravityScale = 2f;
+    public float maxFallSpeed = -10f;
 
     [Header("Projectile")]
     public GameObject projectilePrefab;
-    public Transform firePoint;
+    public Transform projectileSpawnPoint;
+    public float projectileForceX = 5f;
+    public float projectileForceY = 3f;
 
-    [Header("Stumble/Health")]
-    private bool isStumbling;
-    private float stumbleTimer;
+    [Header("States")]
+    public GameObject playerModel;
+    public GameObject playerStumble;
+    public GameObject playerDeath;
+
+    [Header("Stumble Settings")]
     public float stumbleDuration = 7f;
+    private bool isStumbling = false;
+    private Coroutine stumbleCoroutine;
 
-    [Header("Swipe Input")]
-    private Vector2 touchStart;
-    public float swipeThreshold = 70f;
+    [Header("UI")]
+    public GameObject deathPanel;
 
-    private SpriteChanger spriteChanger;
+    private bool isDead = false;
+
+    private MainAnimation animationScript;
+
+    private Vector2 startTouch;
 
     void Start()
     {
-        spriteChanger = GetComponent<SpriteChanger>();
+        rb.gravityScale = gravityScale;
+        animationScript = playerModel.GetComponent<MainAnimation>();
 
-        // Fill the 2D grid
-        int index = 0;
-        for (int y = 0; y < 3; y++)
-        {
-            for (int x = 0; x < 3; x++)
-            {
-                grid[x, y] = gridPoints[index];
-                index++;
-            }
-        }
-
-        // Start at center
-        transform.position = grid[gridX, gridY].position;
+        SetStateNormal();
     }
 
     void Update()
     {
-        HandleKeyboardInput();
-        HandleSwipeInput();
-        HandleStumbleTimer();
+        if (isDead) return;
+
+        HandleMovement();
+        HandleSwipe();
     }
 
-    // --- Keyboard Input ---
-    void HandleKeyboardInput()
+    void HandleMovement()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow)) Move(1, 0);
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) Move(-1, 0);
-        if (Input.GetKeyDown(KeyCode.UpArrow)) Move(0, -1);    // UP now decreases Y (visual up)
-        if (Input.GetKeyDown(KeyCode.DownArrow)) Move(0, 1);   // DOWN increases Y
+        bool isHolding = Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            ThrowProjectile();
-    }
-
-    // --- Touch & Mouse Input ---
-    void HandleSwipeInput()
-    {
-        Vector2 delta = Vector2.zero;
-        bool swipeDetected = false;
-
-        // Touch Input
-        if (Input.touchCount > 0)
+        if (isHolding)
         {
-            Touch touch = Input.GetTouch(0);
+            rb.velocity = new Vector2(rb.velocity.x, upwardSpeed);
 
-            if (touch.phase == TouchPhase.Began)
-                touchStart = touch.position;
-
-            if (touch.phase == TouchPhase.Ended)
-            {
-                delta = touch.position - touchStart;
-                swipeDetected = true;
-            }
-        }
-        // Mouse Input
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
-                touchStart = Input.mousePosition;
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                delta = (Vector2)Input.mousePosition - touchStart;
-                swipeDetected = true;
-            }
-        }
-
-        if (!swipeDetected) return;
-
-        if (delta.magnitude < swipeThreshold)
-        {
-            // Tap/click → throw projectile
-            ThrowProjectile();
-            return;
-        }
-
-        // Determine swipe direction
-        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
-        {
-            if (delta.x > 0) Move(1, 0);
-            else Move(-1, 0);
+            // ✅ ONLY play animation if PlayerModel is active
+            if (playerModel.activeInHierarchy)
+                animationScript?.PlayUp();
         }
         else
         {
-            if (delta.y > 0) Move(0, -1);    // Swipe UP → move visually up
-            else Move(0, 1);                 // Swipe DOWN → move visually down
+            if (rb.velocity.y < maxFallSpeed)
+                rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
+
+            // ✅ ONLY play animation if PlayerModel is active
+            if (playerModel.activeInHierarchy)
+                animationScript?.PlayDown();
         }
     }
 
-    // --- Movement ---
-    void Move(int xDir, int yDir)
+    void HandleSwipe()
     {
-        int targetX = gridX + xDir;
-        int targetY = gridY + yDir;
-
-        // Check boundaries
-        if (targetX < 0 || targetX > 2 || targetY < 0 || targetY > 2)
+        if (Input.GetMouseButtonDown(0))
         {
-            StartCoroutine(Shake());
-            TriggerStumble();
-            return;
+            startTouch = Input.mousePosition;
         }
 
-        // Update grid coordinates
-        gridX = targetX;
-        gridY = targetY;
+        if (Input.GetMouseButtonUp(0))
+        {
+            Vector2 endTouch = Input.mousePosition;
+            Vector2 delta = endTouch - startTouch;
 
-        // Stop any previous movement
-        StopAllCoroutines();
-        StartCoroutine(MoveTo(grid[gridX, gridY].position));
-
-        // Play movement animation
-        spriteChanger.PlayMove(xDir, yDir, isStumbling);
+            if (delta.x > 100f)
+            {
+                ThrowProjectile();
+            }
+        }
     }
 
-    IEnumerator MoveTo(Vector3 target)
+    void ThrowProjectile()
     {
-        isMoving = true;
-        Vector3 start = transform.position;
-        float t = 0;
+        GameObject proj = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
 
-        while (t < moveDuration)
-        {
-            t += Time.deltaTime;
-            transform.position = Vector3.Lerp(start, target, t / moveDuration);
-            yield return null;
-        }
+        Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
+        projRb.velocity = new Vector2(projectileForceX, projectileForceY);
 
-        transform.position = target;
-        isMoving = false;
+        // ✅ ONLY play animation if PlayerModel is active
+        if (playerModel.activeInHierarchy)
+            animationScript?.PlayThrow();
     }
 
-    // --- Shake for invalid movement ---
-    IEnumerator Shake()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        Vector3 start = transform.position;
-        float t = 0;
+        if (isDead) return;
 
-        while (t < shakeTime)
+        if (collision.CompareTag("Death"))
         {
-            t += Time.deltaTime;
-            Vector3 offset = Random.insideUnitCircle * shakeAmount;
-            transform.position = start + offset;
-            yield return null;
+            Die();
         }
-
-        transform.position = start;
+        else if (collision.CompareTag("Stumble"))
+        {
+            HandleStumble();
+        }
     }
 
-    // --- Stumble System ---
-    void TriggerStumble()
+    void HandleStumble()
     {
         if (isStumbling)
         {
@@ -195,54 +127,58 @@ public class PlayerController : MonoBehaviour
         }
 
         isStumbling = true;
-        stumbleTimer = stumbleDuration;
-        spriteChanger.EnterStumble();
+
+        if (stumbleCoroutine != null)
+            StopCoroutine(stumbleCoroutine);
+
+        stumbleCoroutine = StartCoroutine(StumbleTimer());
+
+        SetStateStumble();
     }
 
-    void HandleStumbleTimer()
+    IEnumerator StumbleTimer()
     {
-        if (!isStumbling) return;
+        yield return new WaitForSeconds(stumbleDuration);
 
-        stumbleTimer -= Time.deltaTime;
-        if (stumbleTimer <= 0)
-        {
-            isStumbling = false;
-            spriteChanger.ExitStumble();
-        }
+        isStumbling = false;
+        SetStateNormal();
     }
 
-    // --- Death ---
     void Die()
     {
+        isDead = true;
+
+        SetStateDeath();
+
         StartCoroutine(DeathSequence());
     }
 
     IEnumerator DeathSequence()
     {
-        spriteChanger.PlayDeath();
-        yield return new WaitForSeconds(spriteChanger.deathDuration);
-        GameManager.instance.GameOver();
+        yield return new WaitForSeconds(0.5f);
+
+        Time.timeScale = 0f;
+        deathPanel.SetActive(true);
     }
 
-    // --- Projectile ---
-    void ThrowProjectile()
+    void SetStateNormal()
     {
-        Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        spriteChanger.PlayThrow();
+        playerModel.SetActive(true);
+        playerStumble.SetActive(false);
+        playerDeath.SetActive(false);
     }
 
-    // --- Collisions ---
-    void OnTriggerEnter2D(Collider2D other)
+    void SetStateStumble()
     {
-        if (other.CompareTag("Stumble"))
-        {
-            Destroy(other.gameObject);
-            TriggerStumble();
-        }
+        playerModel.SetActive(false);
+        playerStumble.SetActive(true);
+        playerDeath.SetActive(false);
+    }
 
-        if (other.CompareTag("Death"))
-        {
-            Die();
-        }
+    void SetStateDeath()
+    {
+        playerModel.SetActive(false);
+        playerStumble.SetActive(false);
+        playerDeath.SetActive(true);
     }
 }
