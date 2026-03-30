@@ -897,6 +897,7 @@ MonoBehaviour:
   - {fileID: 9068004389826555079, guid: 57efdbed36221ad45846ad8db619d992, type: 3}
   sector2:
   - {fileID: 9068004389826555079, guid: 07100cc5875b4be4dac45af92092c825, type: 3}
+  - {fileID: 9068004389826555079, guid: 08292d50c84fcbe40b3e21606ecac027, type: 3}
   sector3:
   - {fileID: 9068004389826555079, guid: 9efc59e265572db4d9d886f6308ba72e, type: 3}
   sector4:
