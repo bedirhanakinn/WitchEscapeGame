@@ -8,6 +8,9 @@ public class PlatformManager : MonoBehaviour
     public int platformsAlive = 4;
     public float despawnX = -120f;
 
+    [Header("Spawn Offset")]
+    public float firstSpawnOffset = 80f;
+
     [Header("Speed Settings")]
     public float startSpeed = 10f;
     public AnimationCurve speedCurve;
@@ -86,7 +89,8 @@ public class PlatformManager : MonoBehaviour
 
         if (activePlatforms.Count == 0)
         {
-            spawnX = 0f;
+            // First platform spawns with offset
+            spawnX = firstSpawnOffset;
         }
         else
         {
