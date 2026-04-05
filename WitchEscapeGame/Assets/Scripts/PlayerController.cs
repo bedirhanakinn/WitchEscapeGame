@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     public GameObject deathPanel;
 
+    [Header("Ground Bounce")]
+    public float groundY = 0.30f;
+    public float bounceForce = 3f;
+    private bool hasBounced = false;
+
     private bool isDead = false;
 
     private MainAnimation animationScript;
@@ -48,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
         HandleMovement();
         HandleSwipe();
+        HandleGroundBounce(); // Added ground bounce + stumble check
     }
 
     void HandleMovement()
@@ -58,7 +64,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, upwardSpeed);
 
-            // ✅ ONLY play animation if PlayerModel is active
             if (playerModel.activeInHierarchy)
                 animationScript?.PlayUp();
         }
@@ -67,7 +72,6 @@ public class PlayerController : MonoBehaviour
             if (rb.velocity.y < maxFallSpeed)
                 rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
 
-            // ✅ ONLY play animation if PlayerModel is active
             if (playerModel.activeInHierarchy)
                 animationScript?.PlayDown();
         }
@@ -99,7 +103,6 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
         projRb.velocity = new Vector2(projectileForceX, projectileForceY);
 
-        // ✅ ONLY play animation if PlayerModel is active
         if (playerModel.activeInHierarchy)
             animationScript?.PlayThrow();
     }
@@ -181,4 +184,23 @@ public class PlayerController : MonoBehaviour
         playerStumble.SetActive(false);
         playerDeath.SetActive(true);
     }
+
+    void HandleGroundBounce()
+{
+    if (transform.position.y <= groundY)
+    {
+        if (!hasBounced)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, bounceForce);
+            hasBounced = true;
+
+            // 👇 If already stumbling, Die() will be called automatically
+            HandleStumble();
+        }
+    }
+    else
+    {
+        hasBounced = false;
+    }
+}
 }
