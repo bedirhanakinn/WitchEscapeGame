@@ -9,13 +9,16 @@ public class GameStart : MonoBehaviour
     public float despawnX = -50f;
 
     [Header("Start Delay")]
-    public float startDelay = 1f; // Time after tap before movement starts
+    public float startDelay = 1f;
 
-    [Header("Objects To Disable On Start")]
+    [Header("Objects To Disable On Tap")]
     public List<GameObject> objectsToDisable;
 
-    [Header("Objects To Enable On Start")]
+    [Header("Objects To Enable On Tap")]
     public List<GameObject> objectsToEnable;
+
+    [Header("Objects To Enable After Movement Starts")]
+    public List<GameObject> objectsToEnableAfterDelay;
 
     private bool gameStarted = false;
     private bool canMove = false;
@@ -39,27 +42,35 @@ public class GameStart : MonoBehaviour
     {
         gameStarted = true;
 
-        // Disable selected objects
+        // Disable objects immediately
         foreach (GameObject obj in objectsToDisable)
         {
             if (obj != null)
                 obj.SetActive(false);
         }
 
-        // Enable selected objects
+        // Enable objects immediately
         foreach (GameObject obj in objectsToEnable)
         {
             if (obj != null)
                 obj.SetActive(true);
         }
 
-        // Start delay before movement
+        // Start delay coroutine
         StartCoroutine(StartAfterDelay());
     }
 
     IEnumerator StartAfterDelay()
     {
         yield return new WaitForSeconds(startDelay);
+
+        // Enable delayed objects
+        foreach (GameObject obj in objectsToEnableAfterDelay)
+        {
+            if (obj != null)
+                obj.SetActive(true);
+        }
+
         canMove = true;
     }
 
