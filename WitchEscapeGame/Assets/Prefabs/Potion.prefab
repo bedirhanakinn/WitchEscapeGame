@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 516050791796989452}
   - component: {fileID: 2943582036094623727}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

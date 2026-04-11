@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7134111587931995853
+--- !u!1 &1798731361680081394
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1905277667277332310}
-  - component: {fileID: 8412896194258967936}
-  - component: {fileID: 8852003186338477981}
-  - component: {fileID: -8956033216761344841}
+  - component: {fileID: 1765171569021838814}
+  - component: {fileID: 4103558124220958434}
+  - component: {fileID: 7076003966245938563}
+  - component: {fileID: -4548971197980529615}
   m_Layer: 0
-  m_Name: Stumble1
-  m_TagString: Stumble
+  m_Name: Pitchfork
+  m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1905277667277332310
+--- !u!4 &1765171569021838814
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7134111587931995853}
+  m_GameObject: {fileID: 1798731361680081394}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.319839, y: 2.319839, z: 2.319839}
+  m_LocalRotation: {x: -0, y: -0, z: -0.00013010483, w: 1}
+  m_LocalPosition: {x: -0.7760842, y: -0.14240304, z: 0}
+  m_LocalScale: {x: 1.5869, y: 1.5869, z: 1.5869}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8412896194258967936
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.015}
+--- !u!212 &4103558124220958434
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7134111587931995853}
+  m_GameObject: {fileID: 1798731361680081394}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,24 +75,24 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300178, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+  m_Sprite: {fileID: 21300080, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.21875, y: 0.28125}
+  m_Size: {x: 7.2, y: 7.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &8852003186338477981
+--- !u!58 &7076003966245938563
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7134111587931995853}
+  m_GameObject: {fileID: 1798731361680081394}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -118,16 +118,16 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015625, y: 0.015625}
+  m_Offset: {x: -0.52722543, y: 0.021288784}
   serializedVersion: 2
-  m_Radius: 0.140625
---- !u!114 &-8956033216761344841
+  m_Radius: 0.29120195
+--- !u!114 &-4548971197980529615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7134111587931995853}
+  m_GameObject: {fileID: 1798731361680081394}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b2884f07baeb1e48969d43b70a8cb87, type: 3}
