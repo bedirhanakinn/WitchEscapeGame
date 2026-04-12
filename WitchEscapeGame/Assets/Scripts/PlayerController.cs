@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     private bool isStumbling = false;
     private Coroutine stumbleCoroutine;
 
+    [Header("Stumble Protection")]
+    public float stumbleCooldown = 0.2f;
+    private float lastStumbleTime = -1f;
+
     [Header("UI")]
     public GameObject deathPanel;
 
@@ -36,7 +40,6 @@ public class PlayerController : MonoBehaviour
     private bool isDead = false;
 
     private MainAnimation animationScript;
-
     private Vector2 startTouch;
 
     void Start()
@@ -53,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
         HandleMovement();
         HandleSwipe();
-        HandleGroundBounce(); // Added ground bounce + stumble check
+        HandleGroundBounce();
     }
 
     void HandleMovement()
@@ -80,19 +83,14 @@ public class PlayerController : MonoBehaviour
     void HandleSwipe()
     {
         if (Input.GetMouseButtonDown(0))
-        {
             startTouch = Input.mousePosition;
-        }
 
         if (Input.GetMouseButtonUp(0))
         {
-            Vector2 endTouch = Input.mousePosition;
-            Vector2 delta = endTouch - startTouch;
+            Vector2 delta = (Vector2)Input.mousePosition - startTouch;
 
             if (delta.x > 100f)
-            {
                 ThrowProjectile();
-            }
         }
     }
 
@@ -123,9 +121,15 @@ public class PlayerController : MonoBehaviour
 
     void HandleStumble()
     {
+        // Prevent double trigger in same frame
+        if (Time.time - lastStumbleTime < stumbleCooldown)
+            return;
+
+        lastStumbleTime = Time.time;
+
         if (isStumbling)
         {
-            Die();
+            Die(); // second stumble = death
             return;
         }
 
@@ -152,7 +156,6 @@ public class PlayerController : MonoBehaviour
         isDead = true;
 
         SetStateDeath();
-
         StartCoroutine(DeathSequence());
     }
 
@@ -186,21 +189,21 @@ public class PlayerController : MonoBehaviour
     }
 
     void HandleGroundBounce()
-{
-    if (transform.position.y <= groundY)
     {
-        if (!hasBounced)
+        if (transform.position.y <= groundY)
         {
-            rb.velocity = new Vector2(rb.velocity.x, bounceForce);
-            hasBounced = true;
+            if (!hasBounced)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, bounceForce);
 
-            // 👇 If already stumbling, Die() will be called automatically
-            HandleStumble();
+                hasBounced = true;
+
+                HandleStumble(); // unified system
+            }
+        }
+        else
+        {
+            hasBounced = false;
         }
     }
-    else
-    {
-        hasBounced = false;
-    }
-}
 }

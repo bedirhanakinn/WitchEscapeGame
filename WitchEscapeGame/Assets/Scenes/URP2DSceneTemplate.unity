@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 498874766}
   - component: {fileID: 498874767}
   - component: {fileID: 498874768}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: PlayerStumble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 696340711}
   - component: {fileID: 696340710}
   - component: {fileID: 696340709}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,14 +691,15 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4450160973577718458, guid: 3a819ef4b7c440641bc72693bf061c32, type: 3}
   projectileSpawnPoint: {fileID: 1576245180}
   projectileForceX: 5
-  projectileForceY: 3
+  projectileForceY: 5
   playerModel: {fileID: 1576245179}
   playerStumble: {fileID: 498874765}
   playerDeath: {fileID: 1135502558}
   stumbleDuration: 7
+  stumbleCooldown: 0.2
   deathPanel: {fileID: 1661471452}
   groundY: 0.6
-  bounceForce: 6
+  bounceForce: 7
 --- !u!1 &1008718509
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,7 +755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1135502559}
   - component: {fileID: 1135502560}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: PlayerDeath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -951,7 +952,7 @@ GameObject:
   - component: {fileID: 1576245181}
   - component: {fileID: 1576245182}
   - component: {fileID: 1576245183}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: PlayerModel
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1295,7 +1296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1798731361680081394, guid: 3e35c8ab75ec35d47b195926fad2a65f, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

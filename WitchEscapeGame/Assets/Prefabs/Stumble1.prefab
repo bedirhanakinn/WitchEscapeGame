@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1905277667277332310}
   - component: {fileID: 8412896194258967936}
   - component: {fileID: 8852003186338477981}
-  - component: {fileID: -8956033216761344841}
   m_Layer: 0
   m_Name: Stumble1
   m_TagString: Stumble
@@ -121,15 +120,3 @@ CircleCollider2D:
   m_Offset: {x: 0.015625, y: 0.015625}
   serializedVersion: 2
   m_Radius: 0.140625
---- !u!114 &-8956033216761344841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7134111587931995853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b2884f07baeb1e48969d43b70a8cb87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
