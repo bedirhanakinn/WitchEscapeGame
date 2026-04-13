@@ -11,6 +11,9 @@ public class GameStart : MonoBehaviour
     [Header("Start Delay")]
     public float startDelay = 1f;
 
+    [Header("Objects To Hide On Start")]
+    public List<GameObject> objectsToHideOnStart;
+
     [Header("Objects To Disable On Tap")]
     public List<GameObject> objectsToDisable;
 
@@ -22,6 +25,15 @@ public class GameStart : MonoBehaviour
 
     private bool gameStarted = false;
     private bool canMove = false;
+
+    void Start()
+    {
+        foreach (GameObject obj in objectsToHideOnStart)
+        {
+            if (obj != null)
+                obj.SetActive(false);
+        }
+    }
 
     void Update()
     {
@@ -42,21 +54,18 @@ public class GameStart : MonoBehaviour
     {
         gameStarted = true;
 
-        // Disable objects immediately
         foreach (GameObject obj in objectsToDisable)
         {
             if (obj != null)
                 obj.SetActive(false);
         }
 
-        // Enable objects immediately
         foreach (GameObject obj in objectsToEnable)
         {
             if (obj != null)
                 obj.SetActive(true);
         }
 
-        // Start delay coroutine
         StartCoroutine(StartAfterDelay());
     }
 
@@ -64,7 +73,6 @@ public class GameStart : MonoBehaviour
     {
         yield return new WaitForSeconds(startDelay);
 
-        // Enable delayed objects
         foreach (GameObject obj in objectsToEnableAfterDelay)
         {
             if (obj != null)
