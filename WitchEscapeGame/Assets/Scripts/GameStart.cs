@@ -33,15 +33,18 @@ public class GameStart : MonoBehaviour
     [Header("Objects To Enable After Movement Starts")]
     public List<GameObject> objectsToEnableAfterDelay;
 
+    [Header("UI That CAN Start The Game")]
+    public List<GameObject> allowedTapUI; // 👈 whitelist
+
     // ==============================
     // INTERNAL STATE
     // ==============================
     private bool gameStarted = false;
     private bool canMove = false;
-    private bool isStarting = false; // Prevents spam tap bugs
+    private bool isStarting = false;
 
     // ==============================
-    // RUN ON SCENE START
+    // START
     // ==============================
     void Start()
     {
@@ -52,7 +55,7 @@ public class GameStart : MonoBehaviour
     }
 
     // ==============================
-    // MAIN LOOP
+    // UPDATE
     // ==============================
     void Update()
     {
@@ -60,8 +63,8 @@ public class GameStart : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // Prevent clicks on UI from starting the game
-                if (IsPointerOverUI())
+                // 🚫 Block unwanted UI taps
+                if (IsPointerOverBlockedUI())
                     return;
 
                 StartGame();
@@ -74,20 +77,35 @@ public class GameStart : MonoBehaviour
     }
 
     // ==============================
-    // CHECK IF CLICK IS ON UI
+    // CHECK UI INPUT WITH WHITELIST
     // ==============================
-    bool IsPointerOverUI()
+    bool IsPointerOverBlockedUI()
     {
         if (EventSystem.current == null)
             return false;
 
-#if UNITY_EDITOR || UNITY_STANDALONE
-        return EventSystem.current.IsPointerOverGameObject();
-#else
-        if (Input.touchCount > 0)
-            return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            GameObject hit = result.gameObject;
+
+            // If it's in the allowed list → do NOT block
+            foreach (GameObject allowed in allowedTapUI)
+            {
+                if (hit == allowed || hit.transform.IsChildOf(allowed.transform))
+                    return false;
+            }
+
+            // Otherwise it's UI → block
+            return true;
+        }
+
         return false;
-#endif
     }
 
     // ==============================
@@ -95,18 +113,16 @@ public class GameStart : MonoBehaviour
     // ==============================
     void StartGame()
     {
-        if (isStarting) return; // Extra safety
+        if (isStarting) return;
 
         isStarting = true;
         gameStarted = true;
 
-        // Disable objects (and all their children)
         foreach (GameObject obj in objectsToDisable)
         {
             DisableWithChildren(obj);
         }
 
-        // Enable objects instantly
         foreach (GameObject obj in objectsToEnable)
         {
             if (obj != null)
@@ -117,13 +133,12 @@ public class GameStart : MonoBehaviour
     }
 
     // ==============================
-    // DELAY BEFORE MOVEMENT
+    // DELAY
     // ==============================
     IEnumerator StartAfterDelay()
     {
         yield return new WaitForSeconds(startDelay);
 
-        // Enable delayed objects
         foreach (GameObject obj in objectsToEnableAfterDelay)
         {
             if (obj != null)
@@ -147,7 +162,7 @@ public class GameStart : MonoBehaviour
     }
 
     // ==============================
-    // FORCE DISABLE OBJECT + CHILDREN
+    // FORCE DISABLE WITH CHILDREN
     // ==============================
     void DisableWithChildren(GameObject parent)
     {
