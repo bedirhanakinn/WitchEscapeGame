@@ -1,16 +1,26 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class GameStart : MonoBehaviour
 {
+    // ==============================
+    // MOVEMENT SETTINGS
+    // ==============================
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
     public float despawnX = -50f;
 
+    // ==============================
+    // START DELAY
+    // ==============================
     [Header("Start Delay")]
     public float startDelay = 1f;
 
+    // ==============================
+    // UI / OBJECT CONTROL
+    // ==============================
     [Header("Objects To Hide On Start")]
     public List<GameObject> objectsToHideOnStart;
 
@@ -23,24 +33,37 @@ public class GameStart : MonoBehaviour
     [Header("Objects To Enable After Movement Starts")]
     public List<GameObject> objectsToEnableAfterDelay;
 
+    // ==============================
+    // INTERNAL STATE
+    // ==============================
     private bool gameStarted = false;
     private bool canMove = false;
+    private bool isStarting = false; // Prevents spam tap bugs
 
+    // ==============================
+    // RUN ON SCENE START
+    // ==============================
     void Start()
     {
         foreach (GameObject obj in objectsToHideOnStart)
         {
-            if (obj != null)
-                obj.SetActive(false);
+            DisableWithChildren(obj);
         }
     }
 
+    // ==============================
+    // MAIN LOOP
+    // ==============================
     void Update()
     {
-        if (!gameStarted)
+        if (!gameStarted && !isStarting)
         {
             if (Input.GetMouseButtonDown(0))
             {
+                // Prevent clicks on UI from starting the game
+                if (IsPointerOverUI())
+                    return;
+
                 StartGame();
             }
         }
@@ -50,16 +73,40 @@ public class GameStart : MonoBehaviour
         }
     }
 
+    // ==============================
+    // CHECK IF CLICK IS ON UI
+    // ==============================
+    bool IsPointerOverUI()
+    {
+        if (EventSystem.current == null)
+            return false;
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        return EventSystem.current.IsPointerOverGameObject();
+#else
+        if (Input.touchCount > 0)
+            return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+        return false;
+#endif
+    }
+
+    // ==============================
+    // START GAME
+    // ==============================
     void StartGame()
     {
+        if (isStarting) return; // Extra safety
+
+        isStarting = true;
         gameStarted = true;
 
+        // Disable objects (and all their children)
         foreach (GameObject obj in objectsToDisable)
         {
-            if (obj != null)
-                obj.SetActive(false);
+            DisableWithChildren(obj);
         }
 
+        // Enable objects instantly
         foreach (GameObject obj in objectsToEnable)
         {
             if (obj != null)
@@ -69,10 +116,14 @@ public class GameStart : MonoBehaviour
         StartCoroutine(StartAfterDelay());
     }
 
+    // ==============================
+    // DELAY BEFORE MOVEMENT
+    // ==============================
     IEnumerator StartAfterDelay()
     {
         yield return new WaitForSeconds(startDelay);
 
+        // Enable delayed objects
         foreach (GameObject obj in objectsToEnableAfterDelay)
         {
             if (obj != null)
@@ -82,6 +133,9 @@ public class GameStart : MonoBehaviour
         canMove = true;
     }
 
+    // ==============================
+    // MOVEMENT
+    // ==============================
     void Move()
     {
         transform.position += Vector3.left * moveSpeed * Time.deltaTime;
@@ -89,6 +143,21 @@ public class GameStart : MonoBehaviour
         if (transform.position.x <= despawnX)
         {
             Destroy(gameObject);
+        }
+    }
+
+    // ==============================
+    // FORCE DISABLE OBJECT + CHILDREN
+    // ==============================
+    void DisableWithChildren(GameObject parent)
+    {
+        if (parent == null) return;
+
+        parent.SetActive(false);
+
+        foreach (Transform child in parent.transform)
+        {
+            child.gameObject.SetActive(false);
         }
     }
 }
