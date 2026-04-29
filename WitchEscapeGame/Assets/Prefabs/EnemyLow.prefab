@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3370354623530836801}
   - component: {fileID: 2957706138771145412}
   m_Layer: 0
-  m_Name: EnemyMid
+  m_Name: EnemyLow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,7 +180,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4548971197980529615, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
       propertyPath: height
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -4548971197980529615, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
       propertyPath: distance
@@ -256,14 +256,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1798731361680081394, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7732833014867242165}
+      addedObject: {fileID: 4022112643401934658}
   m_SourcePrefab: {fileID: 100100000, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
 --- !u!1 &3630227792864253727 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1798731361680081394, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
   m_PrefabInstance: {fileID: 3069001201726478061}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7732833014867242165
+--- !u!114 &4022112643401934658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9454de0043aa014da46abe8981c25ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: {x: 0, y: 0, z: 20}
+  rotationSpeed: {x: 0, y: 0, z: 40}
 --- !u!4 &3668303279769334579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1765171569021838814, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
