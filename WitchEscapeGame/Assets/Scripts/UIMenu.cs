@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// One per menu panel. Handles fading the panel's CanvasGroup in/out.
@@ -17,6 +18,12 @@ public class UIMenu : MonoBehaviour
     [Header("Fade")]
     [Tooltip("How long the fade in/out takes, in seconds (unscaled time).")]
     public float fadeDuration = 0.25f;
+
+    [Header("Events")]
+    [Tooltip("Fired when this menu starts fading in. Use to show accompanying UI (e.g. Background).")]
+    public UnityEvent onShow;
+    [Tooltip("Fired when this menu starts fading out. Use to hide accompanying UI (e.g. Background).")]
+    public UnityEvent onHide;
 
     private CanvasGroup canvasGroup;
     private Coroutine fadeRoutine;
@@ -41,6 +48,7 @@ public class UIMenu : MonoBehaviour
         IsOpen = true;
 
         gameObject.SetActive(true);
+        onShow?.Invoke();
         StartFade(1f);
     }
 
@@ -50,6 +58,7 @@ public class UIMenu : MonoBehaviour
         if (!IsOpen) return;
         IsOpen = false;
 
+        onHide?.Invoke();
         StartFade(0f);
     }
 
@@ -62,6 +71,8 @@ public class UIMenu : MonoBehaviour
         CG.interactable = true;
         CG.blocksRaycasts = true;
         IsOpen = true;
+        // Note: onShow is intentionally NOT fired here — Instant variants are
+        // used for initialization only, not player-driven transitions.
     }
 
     /// <summary>Hide with no animation. Used by UIManager during initialization.</summary>
@@ -73,6 +84,7 @@ public class UIMenu : MonoBehaviour
         CG.blocksRaycasts = false;
         gameObject.SetActive(false);
         IsOpen = false;
+        // Note: onHide is intentionally NOT fired here — same reason as above.
     }
 
     /// <summary>
@@ -102,7 +114,6 @@ public class UIMenu : MonoBehaviour
 
     IEnumerator FadeRoutine(float target)
     {
-        // Block taps the moment we start hiding so users can't click during fade-out.
         bool becomingInteractive = target > 0f;
         CG.interactable = becomingInteractive;
         CG.blocksRaycasts = becomingInteractive;
@@ -110,7 +121,6 @@ public class UIMenu : MonoBehaviour
         float start = CG.alpha;
         float t = 0f;
 
-        // Use unscaled time so menus fade properly while the game is paused.
         while (t < fadeDuration)
         {
             t += Time.unscaledDeltaTime;

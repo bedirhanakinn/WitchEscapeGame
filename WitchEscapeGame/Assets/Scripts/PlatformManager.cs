@@ -33,9 +33,6 @@ public class PlatformManager : MonoBehaviour
 
     void Update()
     {
-        // Input.GetMouseButtonDown removed — PlatformManager no longer listens
-        // for taps directly. StartGame() is called by GameStart.onGameStarted
-        // so all tap-blocking logic stays in one place.
         if (!gameStarted) return;
 
         UpdateSpeed();
@@ -43,9 +40,6 @@ public class PlatformManager : MonoBehaviour
         CheckDespawn();
     }
 
-    /// <summary>
-    /// Call this from GameStart.onGameStarted in the Inspector.
-    /// </summary>
     public void StartGame()
     {
         if (gameStarted) return;
@@ -69,6 +63,9 @@ public class PlatformManager : MonoBehaviour
 
     void CheckDespawn()
     {
+        // Clean out any nulls first (destroyed platforms, scene reload remnants)
+        activePlatforms.RemoveAll(p => p == null);
+
         if (activePlatforms.Count == 0) return;
 
         GameObject firstPlatform = activePlatforms[0];
@@ -84,6 +81,7 @@ public class PlatformManager : MonoBehaviour
     void SpawnPlatform()
     {
         GameObject prefab = GetPrefabFromCurrentSector();
+        if (prefab == null) return;
 
         float spawnX;
 
@@ -93,14 +91,29 @@ public class PlatformManager : MonoBehaviour
         }
         else
         {
-            GameObject lastPlatform = activePlatforms[activePlatforms.Count - 1];
-            spawnX = lastPlatform.transform.position.x + platformWidth;
+            // Find the rightmost non-null platform to spawn after
+            GameObject lastPlatform = null;
+            for (int i = activePlatforms.Count - 1; i >= 0; i--)
+            {
+                if (activePlatforms[i] != null)
+                {
+                    lastPlatform = activePlatforms[i];
+                    break;
+                }
+            }
+
+            spawnX = lastPlatform != null
+                ? lastPlatform.transform.position.x + platformWidth
+                : firstSpawnOffset;
         }
 
         GameObject platform = Instantiate(prefab, new Vector3(spawnX, 0f, 0f), Quaternion.identity);
 
         PlatformMover mover = platform.GetComponent<PlatformMover>();
-        mover.Initialize(this);
+        if (mover != null)
+            mover.Initialize(this);
+        else
+            Debug.LogError($"PlatformMover missing on prefab: {prefab.name}");
 
         activePlatforms.Add(platform);
     }
@@ -118,13 +131,12 @@ public class PlatformManager : MonoBehaviour
             _ => sector5,
         };
 
-        if (currentSector.Count == 0)
+        if (currentSector == null || currentSector.Count == 0)
         {
-            Debug.LogError("Sector is empty!");
+            Debug.LogError($"Sector {sectorIndex + 1} is empty!");
             return null;
         }
 
-        int randomIndex = Random.Range(0, currentSector.Count);
-        return currentSector[randomIndex];
+        return currentSector[Random.Range(0, currentSector.Count)];
     }
 }
