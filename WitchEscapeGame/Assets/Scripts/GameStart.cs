@@ -34,8 +34,8 @@ public class GameStart : MonoBehaviour
     [Header("Objects To Enable After Movement Starts")]
     public List<GameObject> objectsToEnableAfterDelay;
 
-    [Header("UI That CAN Start The Game")]
-    public List<GameObject> allowedTapUI; // 👈 whitelist
+    // allowedTapUI whitelist removed — no longer needed.
+    // Blocking is now handled by IsPointerOverBlockedUI() below.
 
     // ==============================
     // EVENTS
@@ -71,7 +71,6 @@ public class GameStart : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // 🚫 Block unwanted UI taps
                 if (IsPointerOverBlockedUI())
                     return;
 
@@ -85,32 +84,40 @@ public class GameStart : MonoBehaviour
     }
 
     // ==============================
-    // CHECK UI INPUT WITH WHITELIST
+    // CHECK UI INPUT
     // ==============================
+
+    /// <summary>
+    /// Returns true (blocks game start) when:
+    ///   1. The tap lands on ANY UI element — catches Settings/Shop/Credits
+    ///      buttons before their panels even open, with no whitelist needed.
+    ///   2. A non-root menu is currently open (e.g. Settings panel is showing)
+    ///      — prevents a tap on the background from starting the game while
+    ///      a sub-menu is visible.
+    /// </summary>
     bool IsPointerOverBlockedUI()
     {
         if (EventSystem.current == null)
             return false;
 
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
-        pointerData.position = Input.mousePosition;
-
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
-
-        foreach (RaycastResult result in results)
-        {
-            GameObject hit = result.gameObject;
-
-            // If it's in the allowed list → do NOT block
-            foreach (GameObject allowed in allowedTapUI)
-            {
-                if (hit == allowed || hit.transform.IsChildOf(allowed.transform))
-                    return false;
-            }
-
-            // Otherwise it's UI → block
+        // Block if pointer is over ANY UI element (buttons, panels, etc.)
+        if (EventSystem.current.IsPointerOverGameObject())
             return true;
+
+        // Also check real touch fingers (mobile)
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                return true;
+        }
+
+        // Block if a sub-menu is open (Settings, Shop, Credits, Pause, etc.)
+        // Safe-guarded in case UIManager.Instance isn't ready yet.
+        if (UIManager.Instance != null)
+        {
+            UIManager.MenuId current = UIManager.Instance.Current;
+            if (current != UIManager.MenuId.None && current != UIManager.MenuId.MainMenu)
+                return true;
         }
 
         return false;

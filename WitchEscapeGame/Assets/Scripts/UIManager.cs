@@ -96,7 +96,7 @@ public class UIManager : MonoBehaviour
         if (history.Count > 0)
         {
             UIMenu top = Get(history.Peek());
-            if (top != null) top.Hide();
+            if (top != null && top.gameObject.activeInHierarchy) top.Hide(); else if (top != null) top.InstantHide();
         }
 
         history.Push(id);
@@ -128,7 +128,7 @@ public class UIManager : MonoBehaviour
         while (history.Count > 0)
         {
             UIMenu m = Get(history.Pop());
-            if (m != null) m.Hide();
+            if (m != null) m.InstantHide();
         }
     }
 

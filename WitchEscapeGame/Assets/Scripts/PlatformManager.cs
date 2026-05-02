@@ -33,22 +33,22 @@ public class PlatformManager : MonoBehaviour
 
     void Update()
     {
-        if (!gameStarted)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                StartGame();
-            }
-            return;
-        }
+        // Input.GetMouseButtonDown removed — PlatformManager no longer listens
+        // for taps directly. StartGame() is called by GameStart.onGameStarted
+        // so all tap-blocking logic stays in one place.
+        if (!gameStarted) return;
 
         UpdateSpeed();
         TrackDistance();
         CheckDespawn();
     }
 
-    void StartGame()
+    /// <summary>
+    /// Call this from GameStart.onGameStarted in the Inspector.
+    /// </summary>
+    public void StartGame()
     {
+        if (gameStarted) return;
         gameStarted = true;
 
         for (int i = 0; i < platformsAlive; i++)
@@ -89,7 +89,6 @@ public class PlatformManager : MonoBehaviour
 
         if (activePlatforms.Count == 0)
         {
-            // First platform spawns with offset
             spawnX = firstSpawnOffset;
         }
         else
