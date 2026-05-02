@@ -162,9 +162,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator DeathSequence()
     {
         yield return new WaitForSeconds(0.5f);
-
-        Time.timeScale = 0f;
-        deathPanel.SetActive(true);
+        GameManager.instance.GameOver();
     }
 
     void SetStateNormal()

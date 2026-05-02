@@ -1,78 +1,104 @@
-using UnityEngine;
-using TMPro; // Needed for the countdown text
 using System.Collections;
+using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Single source of truth for game state (running / paused / game-over).
+/// All menu visuals are delegated to UIManager — this class only handles
+/// timescale, the resume countdown, and scene reloads.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [Header("Original References")]
-    public GameObject gameOverPanel;
-
-    [Header("Pause Menu References")]
-    public GameObject pauseMenuPanel;
+    [Header("Resume Countdown")]
+    [Tooltip("TextMeshPro element used to display the 3-2-1 countdown when resuming from pause.")]
     public TextMeshProUGUI countdownText;
+
+    [Tooltip("How long to count down before un-pausing.")]
+    public int countdownSeconds = 3;
+
+    public bool IsPaused { get; private set; }
+    public bool IsGameOver { get; private set; }
 
     void Awake()
     {
         instance = this;
     }
 
-    // --- ORIGINAL LOGIC ---
+    // ---------------------------------------------------------------
+    // GAME OVER
+    // ---------------------------------------------------------------
+
     public void GameOver()
     {
-        Time.timeScale = 0;
-        gameOverPanel.SetActive(true);
+        if (IsGameOver) return;
+        IsGameOver = true;
+
+        Time.timeScale = 0f;
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.Open(UIManager.MenuId.GameOver);
     }
 
+    // ---------------------------------------------------------------
+    // PAUSE / RESUME
+    // ---------------------------------------------------------------
+
+    /// <summary>Wire the pause button's onClick directly to this.</summary>
+    public void Pause()
+    {
+        if (IsPaused || IsGameOver) return;
+        IsPaused = true;
+
+        Time.timeScale = 0f;
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.Open(UIManager.MenuId.Pause);
+    }
+
+    /// <summary>Wire the Resume button's onClick directly to this.</summary>
     public void Resume()
     {
-        Time.timeScale = 1;
-        gameOverPanel.SetActive(false);
+        if (!IsPaused) return;
+
+        // Close every menu (the pause panel and anything opened from it, e.g. Settings).
+        if (UIManager.Instance != null)
+            UIManager.Instance.CloseAll();
+
+        StartCoroutine(ResumeCountdown());
     }
 
-    // --- NEW PAUSE LOGIC ---
-    public void TogglePause(bool isPaused)
+    IEnumerator ResumeCountdown()
     {
-        if (isPaused)
-        {
-            Time.timeScale = 0f;
-            pauseMenuPanel.SetActive(true);
-        }
-        else
-        {
-            // This starts the 3s countdown sequence
-            StartCoroutine(ResumeSequence());
-        }
-    }
-
-    private IEnumerator ResumeSequence()
-    {
-        pauseMenuPanel.SetActive(false);
-        
         if (countdownText != null)
         {
             countdownText.gameObject.SetActive(true);
-            for (int i = 3; i > 0; i--)
+            for (int i = countdownSeconds; i > 0; i--)
             {
                 countdownText.text = i.ToString();
-                yield return new WaitForSecondsRealtime(1f); 
+                yield return new WaitForSecondsRealtime(1f);
             }
             countdownText.gameObject.SetActive(false);
         }
         else
         {
-            yield return new WaitForSecondsRealtime(3f);
+            yield return new WaitForSecondsRealtime(countdownSeconds);
         }
 
         Time.timeScale = 1f;
+        IsPaused = false;
     }
 
+    // ---------------------------------------------------------------
+    // QUIT / RESTART
+    // ---------------------------------------------------------------
+
+    /// <summary>Reloads the scene. Wire to Quit-to-Main-Menu and Game-Over Retry buttons.</summary>
     public void QuitRun()
     {
         Time.timeScale = 1f;
-        // Reloads the scene to go back to the absolute starting state
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
