@@ -128,7 +128,11 @@ public class UIManager : MonoBehaviour
         while (history.Count > 0)
         {
             UIMenu m = Get(history.Pop());
-            if (m != null) m.InstantHide();
+            if (m != null)
+            {
+                m.onHide?.Invoke();
+                m.InstantHide();
+            }
         }
     }
 

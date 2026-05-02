@@ -62,6 +62,16 @@ public class UIFader : MonoBehaviour
     public void Hide()
     {
         if (!IsVisible) return;
+        // Guard against coroutine being started on an inactive GameObject
+        // (can happen when CloseAll fires onHide on already-hidden panels)
+        if (!gameObject.activeInHierarchy)
+        {
+            CG.alpha = 0f;
+            CG.interactable = false;
+            CG.blocksRaycasts = false;
+            IsVisible = false;
+            return;
+        }
         IsVisible = false;
         StartFade(0f);
     }
