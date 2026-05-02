@@ -155,6 +155,13 @@ public class PlayerController : MonoBehaviour
     {
         isDead = true;
 
+        // Stop stumble timer so it can't call SetStateNormal() after death
+        if (stumbleCoroutine != null)
+        {
+            StopCoroutine(stumbleCoroutine);
+            stumbleCoroutine = null;
+        }
+
         SetStateDeath();
         StartCoroutine(DeathSequence());
     }
