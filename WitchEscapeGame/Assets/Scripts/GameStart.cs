@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
@@ -35,6 +36,13 @@ public class GameStart : MonoBehaviour
 
     [Header("UI That CAN Start The Game")]
     public List<GameObject> allowedTapUI; // 👈 whitelist
+
+    // ==============================
+    // EVENTS
+    // ==============================
+    [Header("Events")]
+    [Tooltip("Fired the moment the player taps to start the game. Wire HUD UIFaders here so they fade in.")]
+    public UnityEvent onGameStarted;
 
     // ==============================
     // INTERNAL STATE
@@ -128,6 +136,9 @@ public class GameStart : MonoBehaviour
             if (obj != null)
                 obj.SetActive(true);
         }
+
+        // Notify listeners (HUD UIFaders, etc.) that the game has started.
+        onGameStarted?.Invoke();
 
         StartCoroutine(StartAfterDelay());
     }

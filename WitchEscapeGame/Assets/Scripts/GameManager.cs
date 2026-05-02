@@ -1,12 +1,13 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Single source of truth for game state (running / paused / game-over).
 /// All menu visuals are delegated to UIManager — this class only handles
-/// timescale, the resume countdown, and scene reloads.
+/// timescale, the resume countdown, scene reloads, and broadcasting state events.
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("How long to count down before un-pausing.")]
     public int countdownSeconds = 3;
+
+    [Header("Events")]
+    [Tooltip("Fired when the player dies. Wire HUD UIFaders here so they fade out.")]
+    public UnityEvent onGameOver;
 
     public bool IsPaused { get; private set; }
     public bool IsGameOver { get; private set; }
@@ -40,6 +45,9 @@ public class GameManager : MonoBehaviour
 
         if (UIManager.Instance != null)
             UIManager.Instance.Open(UIManager.MenuId.GameOver);
+
+        // Notify listeners (HUD UIFaders, etc.) that the game has ended.
+        onGameOver?.Invoke();
     }
 
     // ---------------------------------------------------------------
