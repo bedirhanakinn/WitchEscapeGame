@@ -190,6 +190,10 @@ PrefabInstance:
       propertyPath: duration
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -4548971197980529615, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
+      propertyPath: riseDuration
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1765171569021838814, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.35

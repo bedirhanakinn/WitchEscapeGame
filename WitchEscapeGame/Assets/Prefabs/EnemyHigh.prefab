@@ -192,11 +192,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4548971197980529615, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
       propertyPath: riseHeight
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4548971197980529615, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
+      propertyPath: fallDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4548971197980529615, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
+      propertyPath: fallDuration
       value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: -4548971197980529615, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
       propertyPath: riseDuration
-      value: 0.7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -4548971197980529615, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
       propertyPath: horizontalDistance

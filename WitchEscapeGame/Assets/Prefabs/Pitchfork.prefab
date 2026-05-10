@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -349467231080933599}
   m_Layer: 0
   m_Name: Pitchfork
-  m_TagString: Death
+  m_TagString: Stumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

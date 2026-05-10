@@ -9,6 +9,11 @@ public class PlayerController : MonoBehaviour
     public float gravityScale = 2f;
     public float maxFallSpeed = -10f;
 
+    [Header("Rotation")]
+    public float fallRotationZ = -45f;
+    public float fallRotationSpeed = 5f;
+    public float recoverRotationSpeed = 15f;
+
     [Header("Projectile")]
     public GameObject projectilePrefab;
     public Transform projectileSpawnPoint;
@@ -45,27 +50,37 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb.gravityScale = gravityScale;
-        animationScript = playerModel.GetComponent<MainAnimation>();
+
+        animationScript =
+            playerModel.GetComponent<MainAnimation>();
 
         SetStateNormal();
     }
 
     void Update()
     {
-        if (isDead) return;
+        if (isDead)
+            return;
 
         HandleMovement();
+        HandleRotation();
         HandleSwipe();
         HandleGroundBounce();
     }
 
     void HandleMovement()
     {
-        bool isHolding = Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space);
+        bool isHolding =
+            Input.GetMouseButton(0) ||
+            Input.GetKey(KeyCode.Space);
 
         if (isHolding)
         {
-            rb.velocity = new Vector2(rb.velocity.x, upwardSpeed);
+            rb.velocity =
+                new Vector2(
+                    rb.velocity.x,
+                    upwardSpeed
+                );
 
             if (playerModel.activeInHierarchy)
                 animationScript?.PlayUp();
@@ -73,41 +88,96 @@ public class PlayerController : MonoBehaviour
         else
         {
             if (rb.velocity.y < maxFallSpeed)
-                rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
+            {
+                rb.velocity =
+                    new Vector2(
+                        rb.velocity.x,
+                        maxFallSpeed
+                    );
+            }
 
             if (playerModel.activeInHierarchy)
                 animationScript?.PlayDown();
         }
     }
 
+    void HandleRotation()
+    {
+        bool isHolding =
+            Input.GetMouseButton(0) ||
+            Input.GetKey(KeyCode.Space);
+
+        float targetZ =
+            isHolding ? 0f : fallRotationZ;
+
+        float currentSpeed =
+            isHolding
+            ? recoverRotationSpeed
+            : fallRotationSpeed;
+
+        Quaternion targetRotation =
+            Quaternion.Euler(0f, 0f, targetZ);
+
+        transform.rotation =
+            Quaternion.Lerp(
+                transform.rotation,
+                targetRotation,
+                currentSpeed * Time.deltaTime
+            );
+    }
+
     void HandleSwipe()
     {
+        // ONLY allow throwing while normal model is active
+        if (!playerModel.activeInHierarchy)
+            return;
+
         if (Input.GetMouseButtonDown(0))
+        {
             startTouch = Input.mousePosition;
+        }
 
         if (Input.GetMouseButtonUp(0))
         {
-            Vector2 delta = (Vector2)Input.mousePosition - startTouch;
+            Vector2 delta =
+                (Vector2)Input.mousePosition - startTouch;
 
             if (delta.x > 100f)
+            {
                 ThrowProjectile();
+            }
         }
     }
 
     void ThrowProjectile()
     {
-        GameObject proj = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        // Extra safety check
+        if (!playerModel.activeInHierarchy)
+            return;
 
-        Rigidbody2D projRb = proj.GetComponent<Rigidbody2D>();
-        projRb.velocity = new Vector2(projectileForceX, projectileForceY);
+        GameObject proj =
+            Instantiate(
+                projectilePrefab,
+                projectileSpawnPoint.position,
+                Quaternion.identity
+            );
 
-        if (playerModel.activeInHierarchy)
-            animationScript?.PlayThrow();
+        Rigidbody2D projRb =
+            proj.GetComponent<Rigidbody2D>();
+
+        projRb.velocity =
+            new Vector2(
+                projectileForceX,
+                projectileForceY
+            );
+
+        animationScript?.PlayThrow();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isDead) return;
+        if (isDead)
+            return;
 
         if (collision.CompareTag("Death"))
         {
@@ -121,7 +191,7 @@ public class PlayerController : MonoBehaviour
 
     void HandleStumble()
     {
-        // Prevent double trigger in same frame
+        // Prevent double trigger
         if (Time.time - lastStumbleTime < stumbleCooldown)
             return;
 
@@ -138,7 +208,8 @@ public class PlayerController : MonoBehaviour
         if (stumbleCoroutine != null)
             StopCoroutine(stumbleCoroutine);
 
-        stumbleCoroutine = StartCoroutine(StumbleTimer());
+        stumbleCoroutine =
+            StartCoroutine(StumbleTimer());
 
         SetStateStumble();
     }
@@ -148,6 +219,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(stumbleDuration);
 
         isStumbling = false;
+
         SetStateNormal();
     }
 
@@ -155,7 +227,7 @@ public class PlayerController : MonoBehaviour
     {
         isDead = true;
 
-        // Stop stumble timer so it can't call SetStateNormal() after death
+        // Stop stumble timer
         if (stumbleCoroutine != null)
         {
             StopCoroutine(stumbleCoroutine);
@@ -163,12 +235,14 @@ public class PlayerController : MonoBehaviour
         }
 
         SetStateDeath();
+
         StartCoroutine(DeathSequence());
     }
 
     IEnumerator DeathSequence()
     {
         yield return new WaitForSeconds(0.5f);
+
         GameManager.instance.GameOver();
     }
 
@@ -199,11 +273,15 @@ public class PlayerController : MonoBehaviour
         {
             if (!hasBounced)
             {
-                rb.velocity = new Vector2(rb.velocity.x, bounceForce);
+                rb.velocity =
+                    new Vector2(
+                        rb.velocity.x,
+                        bounceForce
+                    );
 
                 hasBounced = true;
 
-                HandleStumble(); // unified system
+                HandleStumble();
             }
         }
         else
