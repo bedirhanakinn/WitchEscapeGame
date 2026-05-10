@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 1905277667277332310}
   - component: {fileID: 8412896194258967936}
   - component: {fileID: 8852003186338477981}
+  - component: {fileID: 4207105973164173858}
+  - component: {fileID: 4693191685436560495}
   m_Layer: 0
-  m_Name: Stumble1
+  m_Name: Apple
   m_TagString: Stumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,3 +122,33 @@ CircleCollider2D:
   m_Offset: {x: 0.015625, y: 0.015625}
   serializedVersion: 2
   m_Radius: 0.140625
+--- !u!114 &4207105973164173858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7134111587931995853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b2884f07baeb1e48969d43b70a8cb87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalDistance: 0.4
+  riseHeight: 1.2
+  riseDuration: 0.6
+  fallDistance: 0.6
+  fallDuration: 1.7
+--- !u!114 &4693191685436560495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7134111587931995853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9454de0043aa014da46abe8981c25ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: {x: 0, y: 0, z: 100}

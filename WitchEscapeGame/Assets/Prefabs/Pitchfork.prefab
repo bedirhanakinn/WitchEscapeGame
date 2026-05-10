@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4103558124220958434}
   - component: {fileID: 7076003966245938563}
   - component: {fileID: -4548971197980529615}
+  - component: {fileID: -349467231080933599}
   m_Layer: 0
   m_Name: Pitchfork
   m_TagString: Death
@@ -133,6 +134,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2884f07baeb1e48969d43b70a8cb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 2
-  distance: 5
-  duration: 1
+  horizontalDistance: 0.4
+  riseHeight: 1.2
+  riseDuration: 0.6
+  fallDistance: 0.6
+  fallDuration: 1.7
+--- !u!114 &-349467231080933599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798731361680081394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9454de0043aa014da46abe8981c25ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: {x: 0, y: 0, z: 10}

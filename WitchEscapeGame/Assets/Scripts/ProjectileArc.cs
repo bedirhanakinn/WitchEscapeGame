@@ -2,27 +2,48 @@ using UnityEngine;
 
 public class ProjectileArc : MonoBehaviour
 {
-    [Header("Arc Settings")]
-    public float height = 2f;
-    public float distance = 5f;
-    public float duration = 1f;
+    [Header("Movement Settings")]
+    public float horizontalDistance = 5f;
 
-    private Vector3 startLocalPos;
-    private Vector3 endLocalPos;
+    [Header("Rise")]
+    public float riseHeight = 2f;
+    public float riseDuration = 0.3f;
+
+    [Header("Glide Down")]
+    public float fallDistance = 3f;
+    public float fallDuration = 0.7f;
+
+    private Vector3 startPos;
+    private Vector3 peakPos;
+    private Vector3 endPos;
 
     private float timer;
-    private bool isMoving = false;
+    private bool isMoving;
+
+    private enum State
+    {
+        Rising,
+        Falling
+    }
+
+    private State currentState;
 
     public void Launch()
     {
-        // Stay as child → inherit platform movement
+        startPos = transform.localPosition;
 
-        startLocalPos = transform.localPosition;
+        // Position where projectile reaches its peak
+        peakPos = startPos +
+                  Vector3.left * horizontalDistance +
+                  Vector3.up * riseHeight;
 
-        // Always throw LEFT (local space)
-        endLocalPos = startLocalPos + Vector3.left * distance;
+        // Final position after gliding down
+        endPos = peakPos +
+                 Vector3.left * fallDistance +
+                 Vector3.down * riseHeight;
 
         timer = 0f;
+        currentState = State.Rising;
         isMoving = true;
     }
 
@@ -31,25 +52,33 @@ public class ProjectileArc : MonoBehaviour
         if (!isMoving) return;
 
         timer += Time.deltaTime;
-        float t = timer / duration;
 
-        if (t >= 1f)
+        if (currentState == State.Rising)
         {
-            DisableProjectile();
-            return;
+            float t = timer / riseDuration;
+
+            transform.localPosition = Vector3.Lerp(startPos, peakPos, t);
+
+            if (t >= 1f)
+            {
+                timer = 0f;
+                currentState = State.Falling;
+            }
         }
+        else if (currentState == State.Falling)
+        {
+            float t = timer / fallDuration;
 
-        // Horizontal (LOCAL)
-        Vector3 linear = Vector3.Lerp(startLocalPos, endLocalPos, t);
+            // Smooth glide downward
+            t = Mathf.SmoothStep(0f, 1f, t);
 
-        // Arc
-        float arc = height * 4 * (t - t * t);
+            transform.localPosition = Vector3.Lerp(peakPos, endPos, t);
 
-        transform.localPosition = new Vector3(
-            linear.x,
-            linear.y + arc,
-            linear.z
-        );
+            if (t >= 1f)
+            {
+                DisableProjectile();
+            }
+        }
     }
 
     void DisableProjectile()
@@ -57,7 +86,7 @@ public class ProjectileArc : MonoBehaviour
         isMoving = false;
         gameObject.SetActive(false);
 
-        // OPTIONAL: reset position so next activation is clean
-        transform.localPosition = startLocalPos;
+        // Reset for reuse
+        transform.localPosition = startPos;
     }
 }
