@@ -2869,7 +2869,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Swipe to Throw Potions!
+  m_text: "Swipe Right \nto Throw Potions!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d6b1e5d642f9224fb33ffbe80df95f9, type: 2}
   m_sharedMaterial: {fileID: -7733099009267745640, guid: 2d6b1e5d642f9224fb33ffbe80df95f9, type: 2}

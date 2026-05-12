@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9454de0043aa014da46abe8981c25ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: {x: 0, y: 0, z: -100}
+  rotationSpeed: {x: 0, y: 0, z: -120}
 --- !u!114 &6819965146867001203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +140,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 8051161425583176021, guid: b4bf63a2dca47564da42a1b004fd825b, type: 3}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  groundCheckDistance: 5
