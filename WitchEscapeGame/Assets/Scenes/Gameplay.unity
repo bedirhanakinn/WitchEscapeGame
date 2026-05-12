@@ -17534,7 +17534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1435587091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18294,6 +18294,8 @@ GameObject:
   - component: {fileID: 1563852089}
   - component: {fileID: 1563852088}
   - component: {fileID: 1563852087}
+  - component: {fileID: 1563852091}
+  - component: {fileID: 1563852090}
   m_Layer: 5
   m_Name: ScoreHud
   m_TagString: Untagged
@@ -18334,8 +18336,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 125910539}
-  rootToToggle: {fileID: 0}
+  fader: {fileID: 1563852090}
   format: '{0:N0}'
+  revealAtScore: 150
+  countUpRate: 1000
+  countUpMaxDuration: 0.8
+  countUpMinDelta: 50
 --- !u!114 &1563852088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18374,6 +18380,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563852085}
   m_CullTransparentMesh: 1
+--- !u!114 &1563852090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563852085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d74f51cf8a421bc638d3176fb45d4e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 0.25
+  startHidden: 1
+--- !u!225 &1563852091
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563852085}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1576245179
 GameObject:
   m_ObjectHideFlags: 0
