@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7076003966245938563}
   m_Layer: 0
   m_Name: Temp Obstacle
-  m_TagString: Death
+  m_TagString: Stumble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7,9 +7,7 @@ public class PotionFire : MonoBehaviour
 
     [Header("Ground Detection")]
     public LayerMask groundLayer;
-
     public float groundCheckDistance = 10f;
-    public float overlapRadius = 1f;
 
     private bool exploded = false;
 
@@ -18,6 +16,7 @@ public class PotionFire : MonoBehaviour
         if (exploded)
             return;
 
+        // Explode when reaching Y <= 0
         if (transform.position.y <= 0.5f)
         {
             Explode();
@@ -28,73 +27,63 @@ public class PotionFire : MonoBehaviour
     {
         exploded = true;
 
-        Transform parentPlatform = null;
+        Transform movingPlatform = null;
 
-        // FIRST: Try raycast downward
-        RaycastHit2D rayHit = Physics2D.Raycast(
+        // Detect the platform underneath
+        RaycastHit2D hit = Physics2D.Raycast(
             transform.position,
             Vector2.down,
             groundCheckDistance,
             groundLayer
         );
 
-        if (rayHit.collider != null)
+        if (hit.collider != null)
         {
-            parentPlatform = rayHit.collider.transform.root;
-        }
-        else
-        {
-            // FALLBACK: overlap circle
-            Collider2D overlapHit = Physics2D.OverlapCircle(
-                transform.position,
-                overlapRadius,
-                groundLayer
-            );
+            // IMPORTANT:
+            // Parent to the ACTUAL moving object,
+            // not necessarily the root object.
+            movingPlatform = hit.collider.transform;
 
-            if (overlapHit != null)
-            {
-                parentPlatform = overlapHit.transform.root;
-            }
+            Debug.Log("Parenting explosion to: " + movingPlatform.name);
         }
 
-        // Spawn explosion
+        // Create explosion
         GameObject explosion = Instantiate(explosionPrefab);
 
-        // Parent first
-        if (parentPlatform != null)
+        // Parent FIRST
+        if (movingPlatform != null)
         {
-            explosion.transform.SetParent(parentPlatform);
+            explosion.transform.SetParent(movingPlatform, true);
         }
 
-        // Then set position
+        // THEN set world position
         explosion.transform.position = transform.position;
 
-        // Play particles
-        ParticleSystem ps = explosion.GetComponentInChildren<ParticleSystem>();
+        // Reset rotation
+        explosion.transform.rotation = Quaternion.identity;
 
-        if (ps != null)
+        // Play particles manually
+        ParticleSystem[] particleSystems =
+            explosion.GetComponentsInChildren<ParticleSystem>();
+
+        foreach (ParticleSystem ps in particleSystems)
         {
+            ps.Clear();
             ps.Play();
         }
 
+        // Destroy potion
         Destroy(gameObject);
     }
 
-    // Debug visuals
+    // Debug ray visualization
     private void OnDrawGizmosSelected()
     {
-        // Ray
         Gizmos.color = Color.red;
+
         Gizmos.DrawLine(
             transform.position,
             transform.position + Vector3.down * groundCheckDistance
-        );
-
-        // Overlap
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(
-            transform.position,
-            overlapRadius
         );
     }
 }
