@@ -2,14 +2,14 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// HUD score display. Hidden at start; fades in once score crosses a threshold.
-/// Fades out on game over.
+/// HUD score display with count-up animation on bonuses.
 ///
-/// Uses UIFader for the animated transitions. If no UIFader is wired, falls back
-/// to plain SetActive toggling.
+/// - Base ticks (small +5 increments from time scoring) snap immediately to the new value.
+/// - Bonuses (Close Shave, Power-up, anything via ScoreManager.AddBonus) animate
+///   the displayed number rolling up to the target.
 ///
-/// Score is tied to gameplay time (no scoring while paused), so a threshold of 350
-/// with 50 pts/sec base = ~7 seconds of actual play.
+/// Hidden at start; reveals once score crosses a threshold. Hides on game over.
+/// Uses UIFader for animated reveal/hide if present.
 /// </summary>
 [DefaultExecutionOrder(-50)]
 public class ScoreHud : MonoBehaviour
@@ -26,15 +26,29 @@ public class ScoreHud : MonoBehaviour
     [Tooltip("Score must reach this value before the HUD appears. Set 0 to always show.")]
     [SerializeField] private int revealAtScore = 350;
 
+    [Header("Count-up animation")]
+    [Tooltip("How fast the display catches up to a bonus in points per second.")]
+    [SerializeField] private float countUpRate = 1000f;
+
+    [Tooltip("Maximum time a single count-up animation can take. Caps very large bonuses.")]
+    [SerializeField] private float countUpMaxDuration = 0.8f;
+
+    [Tooltip("Bonuses smaller than this snap immediately (no animation).")]
+    [SerializeField] private int countUpMinDelta = 50;
+
     private bool subscribedScore;
+    private bool subscribedBonus;
     private bool subscribedGameOver;
     private bool revealed;
+
+    private int targetScore;
+    private float displayedScore;
+    private float catchUpVelocity;
 
     void Awake()
     {
         if (fader == null) fader = GetComponent<UIFader>();
 
-        // If threshold is 0, reveal immediately
         if (revealAtScore <= 0)
         {
             revealed = true;
@@ -45,29 +59,42 @@ public class ScoreHud : MonoBehaviour
             ApplyHide(instant: true);
         }
 
-        TrySubscribeScore();
+        TrySubscribe();
     }
 
     void Start()
     {
-        TrySubscribeScore();
+        TrySubscribe();
         TrySubscribeGameOver();
-        Refresh(ScoreManager.Instance != null ? ScoreManager.Instance.CurrentScore : 0);
+        int initial = ScoreManager.Instance != null ? ScoreManager.Instance.CurrentScore : 0;
+        targetScore = initial;
+        displayedScore = initial;
+        RenderText(initial);
     }
 
     void OnDestroy()
     {
         if (subscribedScore && ScoreManager.Instance != null)
-            ScoreManager.Instance.OnScoreChanged -= Refresh;
+            ScoreManager.Instance.OnScoreChanged -= HandleScoreChanged;
+        if (subscribedBonus && ScoreManager.Instance != null)
+            ScoreManager.Instance.OnBonusAwarded -= HandleBonusAwarded;
         if (subscribedGameOver && GameManager.instance != null)
             GameManager.instance.onGameOver.RemoveListener(HideOnGameOver);
     }
 
-    private void TrySubscribeScore()
+    private void TrySubscribe()
     {
-        if (subscribedScore || ScoreManager.Instance == null) return;
-        ScoreManager.Instance.OnScoreChanged += Refresh;
-        subscribedScore = true;
+        if (ScoreManager.Instance == null) return;
+        if (!subscribedScore)
+        {
+            ScoreManager.Instance.OnScoreChanged += HandleScoreChanged;
+            subscribedScore = true;
+        }
+        if (!subscribedBonus)
+        {
+            ScoreManager.Instance.OnBonusAwarded += HandleBonusAwarded;
+            subscribedBonus = true;
+        }
     }
 
     private void TrySubscribeGameOver()
@@ -77,19 +104,84 @@ public class ScoreHud : MonoBehaviour
         subscribedGameOver = true;
     }
 
-    private void Refresh(int score)
+    // Bonus arrives BEFORE OnScoreChanged for the same delta. We use it to detect
+    // "this next score change should animate." After the animation flag is consumed,
+    // subsequent score changes snap.
+    private bool nextChangeIsBonus;
+    private int pendingBonusAmount;
+
+    private void HandleBonusAwarded(int amount, string reason)
     {
-        if (!revealed && score >= revealAtScore)
+        if (amount >= countUpMinDelta)
+        {
+            nextChangeIsBonus = true;
+            pendingBonusAmount = amount;
+        }
+    }
+
+    private void HandleScoreChanged(int newScore)
+    {
+        // Reveal trigger
+        if (!revealed && newScore >= revealAtScore)
         {
             revealed = true;
             ApplyShow(instant: false);
         }
 
-        if (scoreText != null) scoreText.text = string.Format(format, score);
+        targetScore = newScore;
+
+        if (nextChangeIsBonus)
+        {
+            // Compute catch-up velocity for this animation
+            float delta = pendingBonusAmount;
+            float duration = Mathf.Min(delta / countUpRate, countUpMaxDuration);
+            duration = Mathf.Max(duration, 0.05f); // never zero
+            catchUpVelocity = delta / duration;
+            nextChangeIsBonus = false;
+            pendingBonusAmount = 0;
+            // displayedScore stays where it is; Update will tween it up
+        }
+        else
+        {
+            // Base tick — snap
+            displayedScore = newScore;
+            catchUpVelocity = 0f;
+            RenderText(newScore);
+        }
+    }
+
+    void Update()
+    {
+        if (catchUpVelocity <= 0f) return;
+        if (Mathf.RoundToInt(displayedScore) >= targetScore)
+        {
+            displayedScore = targetScore;
+            catchUpVelocity = 0f;
+            RenderText(targetScore);
+            return;
+        }
+
+        // Unscaled so the animation completes even if a pause hits mid-roll
+        displayedScore += catchUpVelocity * Time.unscaledDeltaTime;
+        if (displayedScore >= targetScore)
+        {
+            displayedScore = targetScore;
+            catchUpVelocity = 0f;
+        }
+        RenderText(Mathf.RoundToInt(displayedScore));
+    }
+
+    private void RenderText(int value)
+    {
+        if (scoreText != null) scoreText.text = string.Format(format, value);
     }
 
     private void HideOnGameOver()
     {
+        // If a count-up was in progress, snap to final before hiding
+        displayedScore = targetScore;
+        catchUpVelocity = 0f;
+        RenderText(targetScore);
         ApplyHide(instant: false);
     }
 
@@ -99,7 +191,6 @@ public class ScoreHud : MonoBehaviour
         {
             if (instant)
             {
-                // Manual instant set since UIFader.Show is animated
                 var cg = fader.GetComponent<CanvasGroup>();
                 if (cg != null) { cg.alpha = 0f; cg.interactable = false; cg.blocksRaycasts = false; }
             }
