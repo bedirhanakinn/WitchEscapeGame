@@ -277,13 +277,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1798731361680081394, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8648657908736866552}
   m_SourcePrefab: {fileID: 100100000, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
 --- !u!1 &3630227792864253727 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1798731361680081394, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
   m_PrefabInstance: {fileID: 3069001201726478061}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8648657908736866552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3630227792864253727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3625c35af9f333fa35437a4b56922a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customBonus: 0
+  label: Close Shave!
+  playerTag: Player
 --- !u!4 &3668303279769334579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1765171569021838814, guid: 6fa219d181ab56943959606ba012b4b0, type: 3}
