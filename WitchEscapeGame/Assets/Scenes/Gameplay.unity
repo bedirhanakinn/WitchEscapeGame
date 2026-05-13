@@ -9290,7 +9290,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 63eea44bee77f4243b62036005dd935b, type: 3}
   - {fileID: 21300000, guid: 63eea44bee77f4243b62036005dd935b, type: 3}
   - {fileID: 21300000, guid: 63eea44bee77f4243b62036005dd935b, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 6796dcd2dc54ae343bbaeba472622fea, type: 3}
   frameRate: 0.2
   loop: 0
 --- !u!212 &820807303
