@@ -9,6 +9,7 @@ TagManager:
   - Potion
   - Love
   - Frog
+  - Lightning
   layers:
   - Default
   - TransparentFX
