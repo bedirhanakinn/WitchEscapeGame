@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private MainAnimation animationScript;
     private Vector2 startTouch;
 
+    private PowerUpManager powerManager;
+
     void Start()
     {
         rb.gravityScale = gravityScale;
@@ -54,7 +56,10 @@ public class PlayerController : MonoBehaviour
         animationScript =
             playerModel.GetComponent<MainAnimation>();
 
-        SetStateNormal();
+        powerManager =
+            GetComponent<PowerUpManager>();
+
+        powerManager.UpdateVisualState();
     }
 
     void Update()
@@ -179,6 +184,10 @@ public class PlayerController : MonoBehaviour
         if (isDead)
             return;
 
+        // INVINCIBLE DURING POWER
+        if (powerManager.IsPowerActive())
+            return;
+
         if (collision.CompareTag("Death"))
         {
             Die();
@@ -191,6 +200,10 @@ public class PlayerController : MonoBehaviour
 
     void HandleStumble()
     {
+        // IGNORE STUMBLE DURING POWER
+        if (powerManager.IsPowerActive())
+            return;
+
         // Prevent double trigger
         if (Time.time - lastStumbleTime < stumbleCooldown)
             return;
@@ -199,7 +212,7 @@ public class PlayerController : MonoBehaviour
 
         if (isStumbling)
         {
-            Die(); // second stumble = death
+            Die();
             return;
         }
 
@@ -211,7 +224,7 @@ public class PlayerController : MonoBehaviour
         stumbleCoroutine =
             StartCoroutine(StumbleTimer());
 
-        SetStateStumble();
+        powerManager.UpdateVisualState();
     }
 
     IEnumerator StumbleTimer()
@@ -220,21 +233,24 @@ public class PlayerController : MonoBehaviour
 
         isStumbling = false;
 
-        SetStateNormal();
+        powerManager.UpdateVisualState();
     }
 
     void Die()
     {
+        // IGNORE DEATH DURING POWER
+        if (powerManager.IsPowerActive())
+            return;
+
         isDead = true;
 
-        // Stop stumble timer
         if (stumbleCoroutine != null)
         {
             StopCoroutine(stumbleCoroutine);
             stumbleCoroutine = null;
         }
 
-        SetStateDeath();
+        powerManager.UpdateVisualState();
 
         StartCoroutine(DeathSequence());
     }
@@ -244,27 +260,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         GameManager.instance.GameOver();
-    }
-
-    void SetStateNormal()
-    {
-        playerModel.SetActive(true);
-        playerStumble.SetActive(false);
-        playerDeath.SetActive(false);
-    }
-
-    void SetStateStumble()
-    {
-        playerModel.SetActive(false);
-        playerStumble.SetActive(true);
-        playerDeath.SetActive(false);
-    }
-
-    void SetStateDeath()
-    {
-        playerModel.SetActive(false);
-        playerStumble.SetActive(false);
-        playerDeath.SetActive(true);
     }
 
     void HandleGroundBounce()
@@ -281,12 +276,26 @@ public class PlayerController : MonoBehaviour
 
                 hasBounced = true;
 
-                HandleStumble();
+                // ONLY stumble if not powered
+                if (!powerManager.IsPowerActive())
+                {
+                    HandleStumble();
+                }
             }
         }
         else
         {
             hasBounced = false;
         }
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
+    }
+
+    public bool IsStumbling()
+    {
+        return isStumbling;
     }
 }
