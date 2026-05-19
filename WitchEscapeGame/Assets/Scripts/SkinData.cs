@@ -19,6 +19,16 @@ public class SkinData : ScriptableObject
     [Header("PlayerDeath (animated via SpriteLoopAnimator, plays once)")]
     public Sprite[] deathSprites;
 
+    [Header("Main Menu states (used before run starts)")]
+    [Tooltip("Animated burning intro shown when scene loads.")]
+    public Sprite[] burningSprites;
+
+    [Tooltip("Single sprite shown after tap, before run starts.")]
+    public Sprite whistlingSprite;
+
+    [Tooltip("Single sprite shown briefly between whistling and game start.")]
+    public Sprite lookingUpSprite;
+
     [Header("Shop Display")]
     [Tooltip("Optional. If empty, falls back to first frame of upSprites.")]
     public Sprite shopPreview;

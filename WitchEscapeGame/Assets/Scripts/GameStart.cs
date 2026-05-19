@@ -17,31 +17,43 @@ public class GameStart : MonoBehaviour
     // START DELAY
     // ==============================
     [Header("Start Delay")]
+    [Tooltip("Total time from tap to game movement starting.")]
     public float startDelay = 1f;
+
+    [Tooltip("Time after tap before switching from Looking Up to Whistling. Must be less than startDelay.")]
+    public float witchSwapDelay = 0.5f;
 
     // ==============================
     // UI / OBJECT CONTROL
     // ==============================
-    [Header("Objects To Hide On Start")]
+    [Header("Objects To Hide On Start (scene load)")]
     public List<GameObject> objectsToHideOnStart;
 
-    [Header("Objects To Disable On Tap")]
+    [Header("Objects To Disable On Tap (immediately)")]
     public List<GameObject> objectsToDisable;
 
-    [Header("Objects To Enable On Tap")]
+    [Header("Objects To Enable On Tap (immediately)")]
     public List<GameObject> objectsToEnable;
 
-    [Header("Objects To Enable After Movement Starts")]
+    [Header("Witch Swap (after witchSwapDelay seconds)")]
+    [Tooltip("Hide these after witchSwapDelay. e.g. Looking Up Witch.")]
+    public List<GameObject> objectsToHideAfterSwap;
+
+    [Tooltip("Show these after witchSwapDelay. e.g. Whistling Witch.")]
+    public List<GameObject> objectsToShowAfterSwap;
+
+    [Header("Objects To Enable After Full Delay")]
     public List<GameObject> objectsToEnableAfterDelay;
 
-    // allowedTapUI whitelist removed — no longer needed.
-    // Blocking is now handled by IsPointerOverBlockedUI() below.
+    [Header("Objects To Disable After Full Delay")]
+    [Tooltip("Hidden when movement starts. Use this to hide Whistling Witch before gameplay begins.")]
+    public List<GameObject> objectsToDisableAfterDelay;
 
     // ==============================
     // EVENTS
     // ==============================
     [Header("Events")]
-    [Tooltip("Fired the moment the player taps to start the game. Wire HUD UIFaders here so they fade in.")]
+    [Tooltip("Fired the moment the player taps to start the game.")]
     public UnityEvent onGameStarted;
 
     // ==============================
@@ -57,9 +69,7 @@ public class GameStart : MonoBehaviour
     void Start()
     {
         foreach (GameObject obj in objectsToHideOnStart)
-        {
             DisableWithChildren(obj);
-        }
     }
 
     // ==============================
@@ -86,33 +96,20 @@ public class GameStart : MonoBehaviour
     // ==============================
     // CHECK UI INPUT
     // ==============================
-
-    /// <summary>
-    /// Returns true (blocks game start) when:
-    ///   1. The tap lands on ANY UI element — catches Settings/Shop/Credits
-    ///      buttons before their panels even open, with no whitelist needed.
-    ///   2. A non-root menu is currently open (e.g. Settings panel is showing)
-    ///      — prevents a tap on the background from starting the game while
-    ///      a sub-menu is visible.
-    /// </summary>
     bool IsPointerOverBlockedUI()
     {
         if (EventSystem.current == null)
             return false;
 
-        // Block if pointer is over ANY UI element (buttons, panels, etc.)
         if (EventSystem.current.IsPointerOverGameObject())
             return true;
 
-        // Also check real touch fingers (mobile)
         for (int i = 0; i < Input.touchCount; i++)
         {
             if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
                 return true;
         }
 
-        // Block if a sub-menu is open (Settings, Shop, Credits, Pause, etc.)
-        // Safe-guarded in case UIManager.Instance isn't ready yet.
         if (UIManager.Instance != null)
         {
             UIManager.MenuId current = UIManager.Instance.Current;
@@ -133,34 +130,52 @@ public class GameStart : MonoBehaviour
         isStarting = true;
         gameStarted = true;
 
+        // Immediately disable (Burning Witch, etc.)
         foreach (GameObject obj in objectsToDisable)
-        {
             DisableWithChildren(obj);
-        }
 
+        // Immediately enable (Looking Up Witch)
         foreach (GameObject obj in objectsToEnable)
         {
-            if (obj != null)
-                obj.SetActive(true);
+            if (obj != null) obj.SetActive(true);
         }
 
-        // Notify listeners (HUD UIFaders, etc.) that the game has started.
         onGameStarted?.Invoke();
 
         StartCoroutine(StartAfterDelay());
     }
 
     // ==============================
-    // DELAY
+    // DELAY SEQUENCE
     // ==============================
     IEnumerator StartAfterDelay()
     {
-        yield return new WaitForSeconds(startDelay);
+        // Phase 1: Wait for witch swap (Looking Up → Whistling)
+        float swapTime = Mathf.Min(witchSwapDelay, startDelay);
+        yield return new WaitForSeconds(swapTime);
 
+        // Hide Looking Up Witch, show Whistling Witch
+        foreach (GameObject obj in objectsToHideAfterSwap)
+            if (obj != null) obj.SetActive(false);
+
+        foreach (GameObject obj in objectsToShowAfterSwap)
+            if (obj != null) obj.SetActive(true);
+
+        // Phase 2: Wait for remaining time before movement starts
+        float remainingDelay = startDelay - swapTime;
+        if (remainingDelay > 0f)
+            yield return new WaitForSeconds(remainingDelay);
+
+        // Enable delayed objects (HUD, etc.)
         foreach (GameObject obj in objectsToEnableAfterDelay)
         {
-            if (obj != null)
-                obj.SetActive(true);
+            if (obj != null) obj.SetActive(true);
+        }
+
+        // Hide any remaining menu objects (e.g. Whistling Witch)
+        foreach (GameObject obj in objectsToDisableAfterDelay)
+        {
+            if (obj != null) obj.SetActive(false);
         }
 
         canMove = true;
@@ -174,9 +189,7 @@ public class GameStart : MonoBehaviour
         transform.position += Vector3.left * moveSpeed * Time.deltaTime;
 
         if (transform.position.x <= despawnX)
-        {
             Destroy(gameObject);
-        }
     }
 
     // ==============================
@@ -185,12 +198,8 @@ public class GameStart : MonoBehaviour
     void DisableWithChildren(GameObject parent)
     {
         if (parent == null) return;
-
         parent.SetActive(false);
-
         foreach (Transform child in parent.transform)
-        {
             child.gameObject.SetActive(false);
-        }
     }
 }

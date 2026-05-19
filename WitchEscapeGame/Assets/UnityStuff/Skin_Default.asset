@@ -25,6 +25,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 827e2b2c67791f449ae169f11102f2e6, type: 3}
   deathSprites:
   - {fileID: 21300000, guid: d4f538c53cb5e474aa4559816f884190, type: 3}
+  burningSprites:
+  - {fileID: 21300000, guid: 99ff694823a313548910698a7896b343, type: 3}
+  - {fileID: 21300000, guid: f2e86468149a1d54a9262d2e444964d3, type: 3}
+  - {fileID: 21300000, guid: e124fd46091842c44a1c786882818f13, type: 3}
+  whistlingSprite: {fileID: 21300000, guid: 63eea44bee77f4243b62036005dd935b, type: 3}
+  lookingUpSprite: {fileID: 21300000, guid: 760f1a9e91ec5fb46a391748bbc6b403, type: 3}
   shopPreview: {fileID: 0}
   price: 0
   ownedByDefault: 1
