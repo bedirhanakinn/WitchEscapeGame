@@ -15,14 +15,22 @@ MonoBehaviour:
   skinId: purple
   displayName: Purple Witch
   upSprites:
-  - {fileID: 21300000, guid: 295064eb2660ae8478e99161814cc4af, type: 3}
-  downSprites:
-  - {fileID: 21300000, guid: 295064eb2660ae8478e99161814cc4af, type: 3}
+  - {fileID: 21300000, guid: 41dd95eeb0c8118ffb6002dac43d8fe7, type: 3}
+  - {fileID: 21300000, guid: af0196e58eebc6a24a450d781659a0f3, type: 3}
+  downSprites: []
   throwSprites: []
   stumbleSprites:
-  - {fileID: 21300000, guid: 076268dfb3739694a952dec77a8e4e3a, type: 3}
+  - {fileID: 21300000, guid: abcb2f9229cd6266687d05360d7ea980, type: 3}
+  - {fileID: 21300000, guid: 51d9134bd4503a4e8b41ca10af7d7ded, type: 3}
+  - {fileID: 21300000, guid: 0002636e6e8d34a12800d2b7a90652b1, type: 3}
   deathSprites:
-  - {fileID: 21300000, guid: 295064eb2660ae8478e99161814cc4af, type: 3}
-  shopPreview: {fileID: 0}
-  price: 25
+  - {fileID: 21300000, guid: 319c6e296c228475789ca230c1b235a4, type: 3}
+  burningSprites:
+  - {fileID: 21300000, guid: 38b8249df3cc3273d8a565db27572485, type: 3}
+  - {fileID: 21300000, guid: a63f19593d79afcb3b43373ba8e21d8f, type: 3}
+  - {fileID: 21300000, guid: 95891c2eddfcdea8f92a710a9ad63c1d, type: 3}
+  whistlingSprite: {fileID: 21300000, guid: 8942e2f3787995bd9a3d146cda0452c0, type: 3}
+  lookingUpSprite: {fileID: 21300000, guid: 55fa162413de39551b2a58d94c9b38bb, type: 3}
+  shopPreview: {fileID: 21300000, guid: 295064eb2660ae8478e99161814cc4af, type: 3}
+  price: 100
   ownedByDefault: 0

@@ -9113,11 +9113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 751871948}
-  sprites:
-  - {fileID: 21300000, guid: 99ff694823a313548910698a7896b343, type: 3}
-  - {fileID: 21300000, guid: f2e86468149a1d54a9262d2e444964d3, type: 3}
-  - {fileID: 21300000, guid: e124fd46091842c44a1c786882818f13, type: 3}
-  - {fileID: 21300000, guid: f2e86468149a1d54a9262d2e444964d3, type: 3}
+  sprites: []
   frameRate: 0.2
   loop: 1
 --- !u!1 &753560299

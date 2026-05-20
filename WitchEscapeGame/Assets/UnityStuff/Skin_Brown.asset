@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa250a2f45296c5383a858e53882295, type: 3}
+  m_Name: Skin_Brown
+  m_EditorClassIdentifier: 
+  skinId: brown
+  displayName: Brown Witch
+  upSprites:
+  - {fileID: 21300000, guid: 8c1406acb6c83ff69997791a2bd3040d, type: 3}
+  - {fileID: 21300000, guid: ed73c282eca0173fcbbbccbe253c74b7, type: 3}
+  downSprites: []
+  throwSprites: []
+  stumbleSprites:
+  - {fileID: 21300000, guid: 3299c9234c2c0c94b938d57c1b595428, type: 3}
+  - {fileID: 21300000, guid: b5156c455ef6f5b1e8073303423857e9, type: 3}
+  - {fileID: 21300000, guid: 8355f58f19d2f981c899383bbf04dd18, type: 3}
+  deathSprites:
+  - {fileID: 21300000, guid: b9e90632d0a86619e92aabb1fae83dde, type: 3}
+  burningSprites:
+  - {fileID: 21300000, guid: 5290d568009610676a19cfa1c29c61d0, type: 3}
+  - {fileID: 21300000, guid: a8dfc636e81d85e128207d0edd8e33b5, type: 3}
+  - {fileID: 21300000, guid: c9ec7bf5540bbb782a7762fdbd9179b1, type: 3}
+  whistlingSprite: {fileID: 21300000, guid: b17f5baf09946d0af83a3ac4182395fe, type: 3}
+  lookingUpSprite: {fileID: 21300000, guid: e5d010ab7494988a28c3369f514d88fd, type: 3}
+  shopPreview: {fileID: 21300000, guid: b6d02a52e5456100394f4fd26700c961, type: 3}
+  price: 165
+  ownedByDefault: 0

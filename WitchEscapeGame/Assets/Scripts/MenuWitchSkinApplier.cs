@@ -1,40 +1,44 @@
 using UnityEngine;
 
 /// <summary>
-/// Sits in the gameplay scene. References the 3 menu witch GameObjects (Burning,
-/// Whistling, Looking Up). On scene load, reads the currently-equipped skin from
-/// SkinManager and applies the matching menu sprites.
-///
-/// Strict mode: warns if any menu sprite is missing on the equipped skin.
-/// You can disable warnings via the warnOnMissing toggle once art is complete.
+/// Applies the equipped skin's menu sprites to the three menu witch GameObjects.
+/// Reacts to live skin changes via SkinManager.OnSkinEquipped so equipping a
+/// skin in the shop immediately updates the menu witches without a scene reload.
 /// </summary>
 public class MenuWitchSkinApplier : MonoBehaviour
 {
     [Header("Burning (animated)")]
-    [Tooltip("SpriteLoopAnimator on the Burning Witch GameObject.")]
     [SerializeField] private SpriteLoopAnimator burningAnimator;
 
     [Header("Whistling (static)")]
-    [Tooltip("SpriteRenderer on the Whistling Witch GameObject.")]
     [SerializeField] private SpriteRenderer whistlingRenderer;
 
     [Header("Looking Up (static)")]
-    [Tooltip("SpriteRenderer on the Looking Up Witch GameObject.")]
     [SerializeField] private SpriteRenderer lookingUpRenderer;
 
     [Header("Debug")]
-    [Tooltip("Log a warning if the equipped skin is missing any menu sprites. Turn off when art is complete.")]
+    [Tooltip("Log a warning if the equipped skin is missing any menu sprites.")]
     [SerializeField] private bool warnOnMissing = true;
 
     void Start()
     {
         if (SkinManager.Instance == null)
         {
-            Debug.LogError("MenuWitchSkinApplier: SkinManager not found in scene.");
+            Debug.LogError("MenuWitchSkinApplier: SkinManager not found.");
             return;
         }
 
+        // Apply current skin immediately
         ApplySkin(SkinManager.Instance.CurrentSkin);
+
+        // Subscribe so future equips update the menu witches live
+        SkinManager.Instance.OnSkinEquipped += ApplySkin;
+    }
+
+    void OnDestroy()
+    {
+        if (SkinManager.Instance != null)
+            SkinManager.Instance.OnSkinEquipped -= ApplySkin;
     }
 
     private void ApplySkin(SkinData skin)
@@ -42,7 +46,7 @@ public class MenuWitchSkinApplier : MonoBehaviour
         if (skin == null)
         {
             if (warnOnMissing)
-                Debug.LogWarning("MenuWitchSkinApplier: No skin equipped, menu witches will show their default sprites.");
+                Debug.LogWarning("MenuWitchSkinApplier: No skin equipped.");
             return;
         }
 
@@ -52,7 +56,7 @@ public class MenuWitchSkinApplier : MonoBehaviour
             if (skin.burningSprites != null && skin.burningSprites.Length > 0)
                 burningAnimator.SetSprites(skin.burningSprites);
             else if (warnOnMissing)
-                Debug.LogWarning($"MenuWitchSkinApplier: Skin '{skin.skinId}' has no burningSprites assigned.");
+                Debug.LogWarning($"MenuWitchSkinApplier: '{skin.skinId}' missing burningSprites.");
         }
 
         // Whistling
@@ -61,7 +65,7 @@ public class MenuWitchSkinApplier : MonoBehaviour
             if (skin.whistlingSprite != null)
                 whistlingRenderer.sprite = skin.whistlingSprite;
             else if (warnOnMissing)
-                Debug.LogWarning($"MenuWitchSkinApplier: Skin '{skin.skinId}' has no whistlingSprite assigned.");
+                Debug.LogWarning($"MenuWitchSkinApplier: '{skin.skinId}' missing whistlingSprite.");
         }
 
         // Looking Up
@@ -70,7 +74,7 @@ public class MenuWitchSkinApplier : MonoBehaviour
             if (skin.lookingUpSprite != null)
                 lookingUpRenderer.sprite = skin.lookingUpSprite;
             else if (warnOnMissing)
-                Debug.LogWarning($"MenuWitchSkinApplier: Skin '{skin.skinId}' has no lookingUpSprite assigned.");
+                Debug.LogWarning($"MenuWitchSkinApplier: '{skin.skinId}' missing lookingUpSprite.");
         }
     }
 }
