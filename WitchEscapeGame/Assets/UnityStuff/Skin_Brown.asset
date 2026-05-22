@@ -17,7 +17,9 @@ MonoBehaviour:
   upSprites:
   - {fileID: 21300000, guid: 8c1406acb6c83ff69997791a2bd3040d, type: 3}
   - {fileID: 21300000, guid: ed73c282eca0173fcbbbccbe253c74b7, type: 3}
-  downSprites: []
+  downSprites:
+  - {fileID: 21300000, guid: 7ad62bb7b90ff189c8cb2d32f780fd1e, type: 3}
+  - {fileID: 21300000, guid: 6be98e9083c241e6aabc498d73cb111c, type: 3}
   throwSprites: []
   stumbleSprites:
   - {fileID: 21300000, guid: 3299c9234c2c0c94b938d57c1b595428, type: 3}
