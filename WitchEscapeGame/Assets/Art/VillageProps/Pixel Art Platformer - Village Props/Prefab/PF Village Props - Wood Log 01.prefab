@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 982056747370159615}
   - component: {fileID: 982056747370159614}
-  - component: {fileID: 4959970586597024578}
   m_Layer: 0
   m_Name: PF Village Props - Wood Log 01
   m_TagString: Untagged
@@ -25,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982056747370159609}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &982056747370159614
 SpriteRenderer:
@@ -85,41 +84,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &4959970586597024578
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982056747370159609}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.36363637}
-    oldSize: {x: 2.9375, y: 0.6875}
-    newSize: {x: 2.84375, y: 1.53125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.09320444, y: 0.18754596}
-      - {x: -0.5279017, y: 0.2496327}
-      - {x: -0.808991, y: 0.21858448}
-      - {x: -1.3698561, y: 0.21991012}
-      - {x: -1.4378867, y: 0.14930761}
-      - {x: -1.4353148, y: -0.097482085}
-      - {x: -1.3706295, y: -0.15483817}
-      - {x: -0.9680912, y: -0.18582848}
-      - {x: 0.9108961, y: -0.18945703}
-      - {x: 1.3775365, y: -0.18657786}
-      - {x: 1.4364978, y: -0.09949}
-      - {x: 1.4364978, y: 0.121674865}
-      - {x: 1.3820609, y: 0.18686254}

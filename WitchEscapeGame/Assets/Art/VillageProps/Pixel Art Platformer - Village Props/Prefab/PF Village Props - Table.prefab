@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5343106954107881201}
   - component: {fileID: 5343106954107881200}
-  - component: {fileID: 3023209898991381071}
   m_Layer: 0
   m_Name: PF Village Props - Table
   m_TagString: Untagged
@@ -25,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5343106954107881206}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.966, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5343106954107881200
 SpriteRenderer:
@@ -85,40 +84,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &3023209898991381071
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5343106954107881206}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.28125, y: 0.875}
-    newSize: {x: 2.28125, y: 0.875}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1.1093445, y: 0.68714917}
-      - {x: 1.1089706, y: 0.842934}
-      - {x: -1.1092606, y: 0.8453318}
-      - {x: -1.1082153, y: 0.68796235}
-      - {x: -0.9536209, y: 0.688105}
-      - {x: -0.95368195, y: 0.029473662}
-      - {x: -0.7990341, y: 0.031053662}
-      - {x: -0.7957535, y: 0.6894062}
-      - {x: 0.79693604, y: 0.68804246}
-      - {x: 0.7980881, y: 0.029517353}
-      - {x: 0.95303345, y: 0.029837191}
-      - {x: 0.9549408, y: 0.68755317}
