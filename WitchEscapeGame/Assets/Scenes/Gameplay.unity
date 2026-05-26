@@ -9741,10 +9741,13 @@ MonoBehaviour:
   sector1:
   - {fileID: 9068004389826555079, guid: ce160c23ed9db054d90f4265bcfebe02, type: 3}
   - {fileID: 9068004389826555079, guid: 57efdbed36221ad45846ad8db619d992, type: 3}
+  - {fileID: 9068004389826555079, guid: 5581b9b47320ce14581bb3d8cd721848, type: 3}
+  - {fileID: 9068004389826555079, guid: 6b24d869f35860d4a85ebb849c8025d1, type: 3}
   sector2:
   - {fileID: 9068004389826555079, guid: 07100cc5875b4be4dac45af92092c825, type: 3}
   - {fileID: 9068004389826555079, guid: 08292d50c84fcbe40b3e21606ecac027, type: 3}
   - {fileID: 9068004389826555079, guid: 75f4d280f7e0490448aeb7f1a5b34e34, type: 3}
+  - {fileID: 9068004389826555079, guid: df1c90c1b1cd96f4da62577e6b125284, type: 3}
   sector3:
   - {fileID: 9068004389826555079, guid: 9efc59e265572db4d9d886f6308ba72e, type: 3}
   sector4:
@@ -14790,9 +14793,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4516784, y: -0.11887721}
+  m_Offset: {x: -0.57969844, y: -0.14827508}
   serializedVersion: 2
-  m_Radius: 1.7945312
+  m_Radius: 2.6084738
 --- !u!114 &869376402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26447,9 +26450,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.731787, y: -0.47865325}
+  m_Offset: {x: -0.045793917, y: -0.1611042}
   serializedVersion: 2
-  m_Radius: 1.8133954
+  m_Radius: 2.739811
 --- !u!114 &2059104357
 MonoBehaviour:
   m_ObjectHideFlags: 0
