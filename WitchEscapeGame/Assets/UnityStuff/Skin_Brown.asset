@@ -34,5 +34,5 @@ MonoBehaviour:
   whistlingSprite: {fileID: 21300000, guid: b17f5baf09946d0af83a3ac4182395fe, type: 3}
   lookingUpSprite: {fileID: 21300000, guid: e5d010ab7494988a28c3369f514d88fd, type: 3}
   shopPreview: {fileID: 0}
-  price: 165
+  price: 1600
   ownedByDefault: 0
