@@ -8809,7 +8809,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 300}
+  m_SizeDelta: {x: 40, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &732300295
 MonoBehaviour:
@@ -15305,7 +15305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &968206872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19165,6 +19165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatingTextPrefab: {fileID: 7438639538085197141, guid: 1c4b33a95d75fee75b37027b7f5a1b5f, type: 3}
   spawnAnchor: {fileID: 1562501407}
+  stackOffsetX: 160
+  stackOffsetY: -20
   defaultColor: {r: 0.9098039, g: 0.8352941, b: 0.9490196, a: 1}
   closeShaveColor: {r: 0.9098039, g: 0.8352941, b: 0.9490196, a: 1}
   powerUpColor: {r: 0.9098039, g: 0.8352941, b: 0.9490196, a: 1}
