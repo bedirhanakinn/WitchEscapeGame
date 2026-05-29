@@ -2159,7 +2159,7 @@ Transform:
   m_GameObject: {fileID: 348229281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4422,8 +4422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 696340710}
-  upwardSpeed: 5
-  gravityScale: 2
+  upwardSpeed: 5.5
+  gravityScale: 2.5
   maxFallSpeed: -10
   fallRotationZ: -20
   fallRotationSpeed: 16
@@ -10252,7 +10252,7 @@ MonoBehaviour:
   speedMultiplier: 2
   acceleration: 0.1
   maxSpeed: 15
-  startX: -30
+  startX: -31
 --- !u!1 &810489713
 GameObject:
   m_ObjectHideFlags: 0
@@ -10561,6 +10561,7 @@ MonoBehaviour:
   - {fileID: 9068004389826555079, guid: 57efdbed36221ad45846ad8db619d992, type: 3}
   - {fileID: 9068004389826555079, guid: 5581b9b47320ce14581bb3d8cd721848, type: 3}
   - {fileID: 9068004389826555079, guid: 6b24d869f35860d4a85ebb849c8025d1, type: 3}
+  - {fileID: 9068004389826555079, guid: b51a3aaab4014e24d9e730fb997766f8, type: 3}
   sector2:
   - {fileID: 9068004389826555079, guid: 07100cc5875b4be4dac45af92092c825, type: 3}
   - {fileID: 9068004389826555079, guid: 08292d50c84fcbe40b3e21606ecac027, type: 3}
@@ -10568,6 +10569,8 @@ MonoBehaviour:
   - {fileID: 9068004389826555079, guid: df1c90c1b1cd96f4da62577e6b125284, type: 3}
   sector3:
   - {fileID: 9068004389826555079, guid: 9efc59e265572db4d9d886f6308ba72e, type: 3}
+  - {fileID: 9068004389826555079, guid: fa464068d48bb674d9dd051c114fb06b, type: 3}
+  - {fileID: 9068004389826555079, guid: cd17abd05cebddf4b891f0c554d1ccd3, type: 3}
   sector4:
   - {fileID: 9068004389826555079, guid: e27874dd465aa87459af83e1e3a16cfb, type: 3}
   sector5:
@@ -15749,7 +15752,7 @@ MonoBehaviour:
   speedMultiplier: 1
   acceleration: 0.1
   maxSpeed: 15
-  startX: -30
+  startX: -31
 --- !u!4 &869504163
 Transform:
   m_ObjectHideFlags: 0
@@ -15886,7 +15889,7 @@ MonoBehaviour:
   speedMultiplier: 2
   acceleration: 0.05
   maxSpeed: 20
-  startX: -30
+  startX: -31
 --- !u!4 &875466666
 Transform:
   m_ObjectHideFlags: 0
@@ -17180,7 +17183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 16.999939, y: -107}
+  m_AnchoredPosition: {x: 17, y: -107}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1011728199
@@ -18106,7 +18109,7 @@ MonoBehaviour:
   speedMultiplier: 2
   acceleration: 0.05
   maxSpeed: 20
-  startX: -30
+  startX: -31
 --- !u!4 &1103389277
 Transform:
   m_ObjectHideFlags: 0
@@ -19017,8 +19020,8 @@ MonoBehaviour:
   baseSpeed: 0.1
   speedMultiplier: 2
   acceleration: 0.05
-  maxSpeed: 20
-  startX: -30
+  maxSpeed: 15
+  startX: -31
 --- !u!4 &1219796211
 Transform:
   m_ObjectHideFlags: 0
