@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa250a2f45296c5383a858e53882295, type: 3}
+  m_Name: Skin_Green
+  m_EditorClassIdentifier: 
+  skinId: green
+  displayName: Green Witch
+  upSprites:
+  - {fileID: 21300000, guid: b63d43a9318bd774e9c46d155939c583, type: 3}
+  - {fileID: 21300000, guid: 94bcd7b63c575e64291c8b083c991b37, type: 3}
+  downSprites:
+  - {fileID: 21300000, guid: f9c690268136af647b974d11b6f697c0, type: 3}
+  - {fileID: 21300000, guid: 6e1b7f85e5d1099409b773ecba75480c, type: 3}
+  throwSprites: []
+  stumbleSprites:
+  - {fileID: 21300000, guid: 1559aa6a83a6d9e43bfa22aa7a9b545f, type: 3}
+  - {fileID: 21300000, guid: d799d6c16aa661046b812d09ede6b845, type: 3}
+  deathSprites:
+  - {fileID: 21300000, guid: 361b9ec6524c1234a9d31fe2b0c7c6e2, type: 3}
+  burningSprites:
+  - {fileID: 21300000, guid: c9362e261789f9a4289799b1b98cbe7c, type: 3}
+  - {fileID: 21300000, guid: 86adf23f3a108bf4c8e2fffa601a9d3d, type: 3}
+  whistlingSprite: {fileID: 21300000, guid: 2acc5135c7530ed4eb06f555f0024827, type: 3}
+  lookingUpSprite: {fileID: 21300000, guid: 48dfa6a437a37584da7b1be0c68c0a07, type: 3}
+  shopPreview: {fileID: 0}
+  price: 1
+  ownedByDefault: 0
