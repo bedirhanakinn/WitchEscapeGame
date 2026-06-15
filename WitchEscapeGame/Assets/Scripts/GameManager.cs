@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        Application.targetFrameRate = 60;   // ADD THIS
+        QualitySettings.vSyncCount = 0;     // ADD THIS - vsync overrides targetFrameRate
     }
 
     void Start()
