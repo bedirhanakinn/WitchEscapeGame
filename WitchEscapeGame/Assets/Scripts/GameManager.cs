@@ -24,12 +24,38 @@ public class GameManager : MonoBehaviour
     [Tooltip("Fired when the player dies. Wire HUD UIFaders here so they fade out.")]
     public UnityEvent onGameOver;
 
+    // Revive event — invoke this after a successful revive to re-show HUD / pause button, etc.
+    public UnityEvent onRevive;
+
+    // Reference to your player controller so we can restore control after a revive.
+    // Assign in inspector or set from code.
+    public PlayerController playerController;
+
     public bool IsPaused { get; private set; }
     public bool IsGameOver { get; private set; }
 
     void Awake()
     {
         instance = this;
+    }
+
+    void Start()
+    {
+        // Subscribe to ReviveController once all Awake() have run (safer than Awake).
+        if (ReviveController.Instance != null)
+        {
+            ReviveController.Instance.OnReviveCountdownComplete += ResumeFromRevive;
+            ReviveController.Instance.OnAdRewardGranted += HideGameOverForRevive;  // ADD THIS
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (ReviveController.Instance != null)
+        {
+            ReviveController.Instance.OnReviveCountdownComplete -= ResumeFromRevive;
+            ReviveController.Instance.OnAdRewardGranted -= HideGameOverForRevive;  // ADD THIS
+        }
     }
 
     // ---------------------------------------------------------------
@@ -98,6 +124,66 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1f;
         IsPaused = false;
+    }
+
+    /// <summary>
+    /// Hides the GameOver menu immediately when the revive ad reward is granted,
+    /// so only the countdown is visible. Does NOT resume gameplay — that happens
+    /// later in ResumeFromRevive when the countdown completes.
+    /// </summary>
+    public void HideGameOverForRevive()
+    {
+        if (UIManager.Instance != null)
+            UIManager.Instance.CloseAll();
+    }
+
+    /// <summary>
+    /// Called when the revive countdown finishes. Restores control to the player
+    /// and continues the SAME run (no scene reload).
+    ///
+    /// ENDLESS RUNNER NOTE:
+    /// Because platforms scroll and despawn, we can't perfectly freeze world state.
+    /// The standard runner approach is to (a) clear the obstacle that killed the
+    /// player and any immediate nearby hazards, and (b) give brief invulnerability.
+    /// Implement ClearNearbyHazards() / grant i-frames to taste.
+    /// </summary>
+    public void ResumeFromRevive()
+    {
+        IsGameOver = false;
+
+        // Clear whatever killed the player so they don't instantly die again.
+        ClearNearbyHazards();
+
+        // Put the player back into a controllable, alive state.
+        // Adjust to match your PlayerController's API.
+        if (playerController != null)
+        {
+            playerController.ReviveToNormalState();
+        }
+
+        // Resume time. If you want a brief grace period, start an i-frame coroutine here.
+        Time.timeScale = 1f;
+
+        // Re-show the pause button HUD etc. via your existing events if needed.
+        onRevive?.Invoke();
+    }
+
+    /// <summary>
+    /// Destroy/disable obstacles near the player so the revive isn't instantly fatal.
+    /// Implementation depends on your obstacle tags/layers.
+    /// </summary>
+    private void ClearNearbyHazards()
+    {
+        if (playerController == null) return;
+
+        Vector2 center = playerController.transform.position;
+        float clearRadius = 8f;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(center, clearRadius);
+        foreach (var h in hits)
+        {
+            if (h.CompareTag("Death") || h.CompareTag("Stumble"))
+                h.gameObject.SetActive(false);
+        }
     }
 
     // ---------------------------------------------------------------

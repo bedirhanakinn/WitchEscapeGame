@@ -34,9 +34,6 @@ public class PlayerController : MonoBehaviour
     public float stumbleCooldown = 0.2f;
     private float lastStumbleTime = -1f;
 
-    [Header("UI")]
-    public GameObject deathPanel;
-
     [Header("Ground Bounce")]
     public float groundY = 0.30f;
     public float bounceForce = 3f;
@@ -287,6 +284,43 @@ public class PlayerController : MonoBehaviour
         {
             hasBounced = false;
         }
+    }
+
+    /// <summary>
+    /// Restores the player to a normal, controllable, alive state after a revive.
+    /// Called by GameManager.ResumeFromRevive().
+    ///
+    /// Reverses everything Die() did: clears the dead/stumble flags, stops the
+    /// death/stumble coroutines, resets physics so the player doesn't resume
+    /// mid-fall, and forces the normal model active.
+    /// </summary>
+    public void ReviveToNormalState()
+    {
+        // Clear death + stumble flags
+        isDead = false;
+        isStumbling = false;
+
+        // Stop any lingering death/stumble coroutines
+        if (stumbleCoroutine != null)
+        {
+            StopCoroutine(stumbleCoroutine);
+            stumbleCoroutine = null;
+        }
+        StopAllCoroutines();
+
+        // Reset physics so the player doesn't resume mid-fall or rotated
+        rb.velocity = Vector2.zero;
+        transform.rotation = Quaternion.identity;
+        hasBounced = false;
+
+        // Explicitly force the normal model active (robust regardless of
+        // how PowerUpManager.UpdateVisualState resolves state)
+        if (playerModel != null) playerModel.SetActive(true);
+        if (playerStumble != null) playerStumble.SetActive(false);
+        if (playerDeath != null) playerDeath.SetActive(false);
+
+        // Let the power manager re-sync any power-related visuals
+        powerManager.UpdateVisualState();
     }
 
     public bool IsDead()
