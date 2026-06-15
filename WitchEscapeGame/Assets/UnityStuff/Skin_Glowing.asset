@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa250a2f45296c5383a858e53882295, type: 3}
+  m_Name: Skin_Glowing
+  m_EditorClassIdentifier: 
+  skinId: glowing
+  displayName: Glowing Witch
+  upSprites:
+  - {fileID: 21300000, guid: d9cf0b736fff20845add49a50b29dc54, type: 3}
+  - {fileID: 21300000, guid: 61c068af64a81dc40a80b76283045832, type: 3}
+  downSprites:
+  - {fileID: 21300000, guid: 2178118c857654f45970e097cb7e8892, type: 3}
+  - {fileID: 21300000, guid: fa0050b394d36624d9f0420529f43e05, type: 3}
+  throwSprites: []
+  stumbleSprites:
+  - {fileID: 21300000, guid: c409c07dc9b0d4f40a58b6afa038918c, type: 3}
+  - {fileID: 21300000, guid: 0df2413844d22f04cafb755c07d86c73, type: 3}
+  deathSprites:
+  - {fileID: 0}
+  burningSprites:
+  - {fileID: 21300000, guid: 1c70054c9269a3149a280600577b3d08, type: 3}
+  - {fileID: 21300000, guid: e3015918f303df34da3c29ebd8b63597, type: 3}
+  whistlingSprite: {fileID: 21300000, guid: 9e9b02581e0813046bd7650aed8d4869, type: 3}
+  lookingUpSprite: {fileID: 21300000, guid: f785d4b208757a74994144ab4c78a8fc, type: 3}
+  shopPreview: {fileID: 0}
+  price: 1
+  ownedByDefault: 0
