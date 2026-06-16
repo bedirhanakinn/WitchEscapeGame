@@ -22,10 +22,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fa0050b394d36624d9f0420529f43e05, type: 3}
   throwSprites: []
   stumbleSprites:
-  - {fileID: 21300000, guid: c409c07dc9b0d4f40a58b6afa038918c, type: 3}
-  - {fileID: 21300000, guid: 0df2413844d22f04cafb755c07d86c73, type: 3}
+  - {fileID: 21300000, guid: 5931c34a1e71ade45b70224ad3c1fbac, type: 3}
+  - {fileID: 21300000, guid: b3cd85b783c0d514dad31c5463a2fe99, type: 3}
   deathSprites:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: c409c07dc9b0d4f40a58b6afa038918c, type: 3}
   burningSprites:
   - {fileID: 21300000, guid: 1c70054c9269a3149a280600577b3d08, type: 3}
   - {fileID: 21300000, guid: e3015918f303df34da3c29ebd8b63597, type: 3}
