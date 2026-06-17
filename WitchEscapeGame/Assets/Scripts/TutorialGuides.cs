@@ -35,6 +35,69 @@ public class TutorialGuides : MonoBehaviour
 
     private bool _showTutorialThisRun;
 
+    // Tracks which guide(s) WE turned on, so we know what to restore
+    // when a menu closes (and don't accidentally re-show something
+    // that had already finished its turn).
+    private bool _tapToStartWasVisible;
+    private bool _tapToFlyWasVisible;
+    private bool _swipeWasVisible;
+
+    private bool _hiddenForMenu;
+
+    void Update()
+    {
+        if (UIManager.Instance == null) return;
+
+        // IsAnyMenuOpen is true even while MainMenu itself is showing (it's the
+        // startingMenu). We only want to hide guides for the SUBMENUS that
+        // actually cover the screen (Shop/Settings/Credits/Pause/GameOver) —
+        // not for MainMenu, since the start guide needs to render over it.
+        var current = UIManager.Instance.Current;
+        bool blockingMenuOpen =
+            current != UIManager.MenuId.None &&
+            current != UIManager.MenuId.MainMenu;
+
+        if (blockingMenuOpen && !_hiddenForMenu)
+        {
+            HideForMenu();
+        }
+        else if (!blockingMenuOpen && _hiddenForMenu)
+        {
+            RestoreAfterMenu();
+        }
+    }
+
+    /// <summary>
+    /// Called when a menu (Shop/Settings/Credits/Pause) opens. Remembers which
+    /// guides were on screen, then hides all of them so they don't render
+    /// behind/through the menu.
+    /// </summary>
+    private void HideForMenu()
+    {
+        _hiddenForMenu = true;
+
+        _tapToStartWasVisible = tapToStart != null && tapToStart.activeSelf;
+        _tapToFlyWasVisible = tapToFly != null && tapToFly.activeSelf;
+        _swipeWasVisible = swipeToThrow != null && swipeToThrow.activeSelf;
+
+        if (tapToStart != null) tapToStart.SetActive(false);
+        if (tapToFly != null) tapToFly.SetActive(false);
+        if (swipeToThrow != null) swipeToThrow.SetActive(false);
+    }
+
+    /// <summary>
+    /// Called when the menu closes. Restores whichever guide(s) were visible
+    /// right before the menu opened, so the sequence resumes where it left off.
+    /// </summary>
+    private void RestoreAfterMenu()
+    {
+        _hiddenForMenu = false;
+
+        if (tapToStart != null) tapToStart.SetActive(_tapToStartWasVisible);
+        if (tapToFly != null) tapToFly.SetActive(_tapToFlyWasVisible);
+        if (swipeToThrow != null) swipeToThrow.SetActive(_swipeWasVisible);
+    }
+
     void Start()
     {
         // Decide once at scene load whether tutorials run this time.
