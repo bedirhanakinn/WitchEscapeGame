@@ -30,6 +30,11 @@ public class RewardGiver : MonoBehaviour
     [Tooltip("Optional: trigger this on collision/trigger enter with the player.")]
     [SerializeField] private bool giveOnPlayerTrigger = false;
 
+    [Tooltip("Optional: trigger the reward automatically when this GameObject " +
+             "becomes active (SetActive(true) or OnEnable). Useful when a model " +
+             "is activated on collision and that activation should grant points.")]
+    [SerializeField] private bool giveOnEnable = false;
+
     [SerializeField] private string playerTag = "Player";
 
     [Header("Hooks (optional)")]
@@ -77,6 +82,12 @@ public class RewardGiver : MonoBehaviour
             CurrencyManager.Instance.AddCoins(customCoins);
 
         onRewardGiven?.Invoke();
+    }
+
+    void OnEnable()
+    {
+        if (giveOnEnable)
+            GiveReward();
     }
 
     void OnTriggerEnter2D(Collider2D other)
