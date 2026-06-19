@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 8156885334878970524}
   - component: {fileID: 5956770880911497443}
   - component: {fileID: 2655890531562193240}
+  - component: {fileID: 7372816437779633339}
   m_Layer: 0
   m_Name: PotionModel
   m_TagString: Untagged
@@ -204,6 +205,27 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2128cb364b49b5c4fab209339fffb6aa, type: 3}
   frameRate: 0.1
   loop: 1
+--- !u!114 &7372816437779633339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2542652505162533474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9c7c0f709576a4c9aaaaf8bcf84a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 1000
+  coins: 0
+  pointsLabel: Burn Bonus!
+  onceOnly: 1
+  giveOnPlayerTrigger: 0
+  playerTag: Player
+  onRewardGiven:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3052655312839234699
 GameObject:
   m_ObjectHideFlags: 0
