@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6757946708597719036}
   - component: {fileID: 6958635586765968964}
   - component: {fileID: 804646710922764333}
+  - component: {fileID: 9050683581471221099}
   m_Layer: 0
   m_Name: FrogModel
   m_TagString: Untagged
@@ -105,6 +106,28 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f19baae83e6db0f48898b5bebd1b109d, type: 3}
   frameRate: 0.2
   loop: 1
+--- !u!114 &9050683581471221099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239382943578289995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9c7c0f709576a4c9aaaaf8bcf84a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 1000
+  coins: 0
+  pointsLabel: Frog Points!
+  onceOnly: 1
+  giveOnPlayerTrigger: 0
+  giveOnEnable: 1
+  playerTag: Player
+  onRewardGiven:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &935817060944219329
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +325,7 @@ GameObject:
   - component: {fileID: 4405281545615774129}
   - component: {fileID: 2766143815235392984}
   - component: {fileID: 6382784343474710704}
+  - component: {fileID: 4602044390663280955}
   m_Layer: 0
   m_Name: LoveModel
   m_TagString: Untagged
@@ -396,6 +420,28 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fd9088e7d23f1df49b4ee70edd8cbec3, type: 3}
   frameRate: 0.1
   loop: 1
+--- !u!114 &4602044390663280955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2524126828635839162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9c7c0f709576a4c9aaaaf8bcf84a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 1000
+  coins: 0
+  pointsLabel: Love Points!
+  onceOnly: 1
+  giveOnPlayerTrigger: 0
+  giveOnEnable: 1
+  playerTag: Player
+  onRewardGiven:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3439233993272865898
 GameObject:
   m_ObjectHideFlags: 0
@@ -10483,6 +10529,7 @@ GameObject:
   - component: {fileID: 7610396030758320436}
   - component: {fileID: 1497472952754519582}
   - component: {fileID: 8421350359349186558}
+  - component: {fileID: 2544822937666155566}
   m_Layer: 0
   m_Name: PotionModel
   m_TagString: Untagged
@@ -10574,6 +10621,28 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2128cb364b49b5c4fab209339fffb6aa, type: 3}
   frameRate: 0.1
   loop: 1
+--- !u!114 &2544822937666155566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9125693887764567702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9c7c0f709576a4c9aaaaf8bcf84a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 1000
+  coins: 0
+  pointsLabel: Burn Bonus!
+  onceOnly: 1
+  giveOnPlayerTrigger: 0
+  giveOnEnable: 1
+  playerTag: Player
+  onRewardGiven:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &7803077272773221776
 PrefabInstance:
   m_ObjectHideFlags: 0

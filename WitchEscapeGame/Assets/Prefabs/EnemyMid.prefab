@@ -222,6 +222,7 @@ MonoBehaviour:
   pointsLabel: Burn Bonus!
   onceOnly: 1
   giveOnPlayerTrigger: 0
+  giveOnEnable: 1
   playerTag: Player
   onRewardGiven:
     m_PersistentCalls:
@@ -237,6 +238,7 @@ GameObject:
   - component: {fileID: 118847456206543390}
   - component: {fileID: 8797257827060443431}
   - component: {fileID: 8338746055936241560}
+  - component: {fileID: 6774336476819273531}
   m_Layer: 0
   m_Name: FrogModel
   m_TagString: Untagged
@@ -331,6 +333,28 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f19baae83e6db0f48898b5bebd1b109d, type: 3}
   frameRate: 0.2
   loop: 1
+--- !u!114 &6774336476819273531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052655312839234699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9c7c0f709576a4c9aaaaf8bcf84a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 1000
+  coins: 0
+  pointsLabel: Frog Points!
+  onceOnly: 1
+  giveOnPlayerTrigger: 0
+  giveOnEnable: 1
+  playerTag: Player
+  onRewardGiven:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3368004530329670856
 GameObject:
   m_ObjectHideFlags: 0
@@ -15222,6 +15246,7 @@ GameObject:
   - component: {fileID: 7366666403605018135}
   - component: {fileID: 4674469856172141378}
   - component: {fileID: 7001183408232722379}
+  - component: {fileID: 7694927453209769797}
   m_Layer: 0
   m_Name: LoveModel
   m_TagString: Untagged
@@ -15315,6 +15340,28 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c451bb3e04990c44ea82f7217dc3214f, type: 3}
   frameRate: 0.2
   loop: 1
+--- !u!114 &7694927453209769797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956856083314151946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9c7c0f709576a4c9aaaaf8bcf84a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 1000
+  coins: 0
+  pointsLabel: Love Points!
+  onceOnly: 1
+  giveOnPlayerTrigger: 0
+  giveOnEnable: 1
+  playerTag: Player
+  onRewardGiven:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3069001201726478061
 PrefabInstance:
   m_ObjectHideFlags: 0
