@@ -13,8 +13,8 @@ public class PlatformManager : MonoBehaviour
 
     [Header("Speed Settings")]
     public float startSpeed = 10f;
-    public AnimationCurve speedCurve;
-    public float speedCurveMultiplier = 0.05f;
+    public float maxSpeed = 16f;
+    public float timeToMaxSpeed = 120f; // seconds (2 minutes)
 
     [Header("Sectors")]
     public List<GameObject> sector1;
@@ -26,6 +26,7 @@ public class PlatformManager : MonoBehaviour
     private List<GameObject> activePlatforms = new List<GameObject>();
 
     private float totalDistanceTravelled = 0f;
+    private float gameplayTime = 0f;
     private bool gameStarted = false;
 
     public bool GameStarted => gameStarted;
@@ -53,7 +54,10 @@ public class PlatformManager : MonoBehaviour
 
     void UpdateSpeed()
     {
-        CurrentSpeed = startSpeed + speedCurve.Evaluate(totalDistanceTravelled * speedCurveMultiplier);
+        gameplayTime += Time.deltaTime;
+
+        float t = Mathf.Clamp01(gameplayTime / timeToMaxSpeed);
+        CurrentSpeed = Mathf.Lerp(startSpeed, maxSpeed, t);
     }
 
     void TrackDistance()
