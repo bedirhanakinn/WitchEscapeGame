@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7921076258788708257}
   - component: {fileID: 7921076258788708254}
-  - component: {fileID: 7921076258788708252}
-  - component: {fileID: 7921076258788708255}
   m_Layer: 0
   m_Name: PF Village Props - Pot 03
   m_TagString: Untagged
@@ -26,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7921076258788708256}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7921076258788708254
 SpriteRenderer:
@@ -86,59 +84,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &7921076258788708252
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7921076258788708256}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.47368422, y: 0.4827586}
-    oldSize: {x: 0.59375, y: 0.90625}
-    newSize: {x: 0.59375, y: 0.90625}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.15418005, y: 0.43697107}
-      - {x: -0.12611389, y: 0.43680286}
-      - {x: -0.12552261, y: 0.25327766}
-      - {x: -0.24676609, y: 0.09217036}
-      - {x: -0.25027084, y: -0.15422153}
-      - {x: -0.121154785, y: -0.40829766}
-      - {x: 0.16017056, y: -0.40584862}
-      - {x: 0.28339863, y: -0.16880047}
-      - {x: 0.28260708, y: 0.087769985}
-      - {x: 0.15795946, y: 0.25109148}
---- !u!50 &7921076258788708255
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7921076258788708256}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 5
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
