@@ -74,7 +74,9 @@ public class PlayerController : MonoBehaviour
     {
         bool isHolding =
             Input.GetMouseButton(0) ||
-            Input.GetKey(KeyCode.Space);
+            Input.GetKey(KeyCode.W) ||
+            Input.GetKey(KeyCode.Space) ||
+            Input.GetKey(KeyCode.UpArrow);
 
         if (isHolding)
         {
@@ -107,7 +109,9 @@ public class PlayerController : MonoBehaviour
     {
         bool isHolding =
             Input.GetMouseButton(0) ||
-            Input.GetKey(KeyCode.Space);
+            Input.GetKey(KeyCode.W) ||
+            Input.GetKey(KeyCode.Space) ||
+            Input.GetKey(KeyCode.UpArrow);
 
         float targetZ =
             isHolding ? 0f : fallRotationZ;
@@ -134,6 +138,14 @@ public class PlayerController : MonoBehaviour
         if (!playerModel.activeInHierarchy)
             return;
 
+        // Keyboard throw controls
+        if (Input.GetKeyDown(KeyCode.D) ||
+            Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            ThrowProjectile();
+        }
+
+        // Existing swipe controls
         if (Input.GetMouseButtonDown(0))
         {
             startTouch = Input.mousePosition;
