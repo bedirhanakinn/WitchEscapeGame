@@ -20,7 +20,8 @@ MonoBehaviour:
   downSprites:
   - {fileID: 21300000, guid: f9c690268136af647b974d11b6f697c0, type: 3}
   - {fileID: 21300000, guid: 6e1b7f85e5d1099409b773ecba75480c, type: 3}
-  throwSprites: []
+  throwSprites:
+  - {fileID: 21300000, guid: b63d43a9318bd774e9c46d155939c583, type: 3}
   stumbleSprites:
   - {fileID: 21300000, guid: 1559aa6a83a6d9e43bfa22aa7a9b545f, type: 3}
   - {fileID: 21300000, guid: d799d6c16aa661046b812d09ede6b845, type: 3}

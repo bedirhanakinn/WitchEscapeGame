@@ -20,11 +20,11 @@ MonoBehaviour:
   downSprites:
   - {fileID: 21300000, guid: 7ad62bb7b90ff189c8cb2d32f780fd1e, type: 3}
   - {fileID: 21300000, guid: 6be98e9083c241e6aabc498d73cb111c, type: 3}
-  throwSprites: []
+  throwSprites:
+  - {fileID: 21300000, guid: 8c1406acb6c83ff69997791a2bd3040d, type: 3}
   stumbleSprites:
   - {fileID: 21300000, guid: 3299c9234c2c0c94b938d57c1b595428, type: 3}
   - {fileID: 21300000, guid: b5156c455ef6f5b1e8073303423857e9, type: 3}
-  - {fileID: 21300000, guid: 8355f58f19d2f981c899383bbf04dd18, type: 3}
   deathSprites:
   - {fileID: 21300000, guid: b9e90632d0a86619e92aabb1fae83dde, type: 3}
   burningSprites:
