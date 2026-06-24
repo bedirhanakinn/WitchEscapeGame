@@ -10,6 +10,7 @@ TagManager:
   - Love
   - Frog
   - Lightning
+  - Coin
   layers:
   - Default
   - TransparentFX

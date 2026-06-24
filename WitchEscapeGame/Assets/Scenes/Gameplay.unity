@@ -1960,6 +1960,7 @@ GameObject:
   - component: {fileID: 275985492}
   - component: {fileID: 275985491}
   - component: {fileID: 275985490}
+  - component: {fileID: 275985495}
   m_Layer: 0
   m_Name: LightningPower
   m_TagString: Lightning
@@ -2102,6 +2103,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 696340708}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &275985495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275985489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b3a460ae0641b46801bc806d29ed10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnetRadius: 8
+  pullSpeed: 10
 --- !u!1 &303745631
 GameObject:
   m_ObjectHideFlags: 0
@@ -16189,6 +16204,7 @@ GameObject:
   - component: {fileID: 869376398}
   - component: {fileID: 869376402}
   - component: {fileID: 869376401}
+  - component: {fileID: 869376403}
   m_Layer: 0
   m_Name: FrogPower
   m_TagString: Frog
@@ -16331,6 +16347,20 @@ MonoBehaviour:
   duration: 0.15
   strength: 0.15
   startDelay: 0
+--- !u!114 &869376403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869376397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b3a460ae0641b46801bc806d29ed10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnetRadius: 8
+  pullSpeed: 10
 --- !u!1 &869504161
 GameObject:
   m_ObjectHideFlags: 0
@@ -29896,6 +29926,7 @@ GameObject:
   - component: {fileID: 2059104354}
   - component: {fileID: 2059104356}
   - component: {fileID: 2059104357}
+  - component: {fileID: 2059104358}
   m_Layer: 0
   m_Name: LovePower
   m_TagString: Love
@@ -30041,6 +30072,20 @@ MonoBehaviour:
   duration: 0.15
   strength: 0.15
   startDelay: 0
+--- !u!114 &2059104358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059104352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b3a460ae0641b46801bc806d29ed10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnetRadius: 8
+  pullSpeed: 10
 --- !u!1 &2065781906
 GameObject:
   m_ObjectHideFlags: 0
