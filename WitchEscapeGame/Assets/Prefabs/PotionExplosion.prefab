@@ -14680,6 +14680,7 @@ GameObject:
   - component: {fileID: 7665153110571114670}
   - component: {fileID: 7519388531448821300}
   - component: {fileID: 8810403628774349782}
+  - component: {fileID: 3166152302868750041}
   m_Layer: 0
   m_Name: PotionExplosion
   m_TagString: Potion
@@ -14750,6 +14751,33 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.55817425, y: 0.59876883}
+  m_Offset: {x: -10.451517, y: 0.59876823}
   serializedVersion: 2
-  m_Radius: 1.1089178
+  m_Radius: 1.3834019
+--- !u!50 &3166152302868750041
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051161425583176021}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
