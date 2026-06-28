@@ -158,6 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectibleType: 0
+  pickupSound: {fileID: 8300000, guid: ffa201b6d81f1be469287b2fdd838cd1, type: 3}
+  soundVolume: 1
 --- !u!114 &962690653590512561
 MonoBehaviour:
   m_ObjectHideFlags: 0

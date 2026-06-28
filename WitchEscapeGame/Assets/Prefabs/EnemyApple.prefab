@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6958635586765968964}
   - component: {fileID: 804646710922764333}
   - component: {fileID: 9050683581471221099}
+  - component: {fileID: 3018901035458138720}
   m_Layer: 0
   m_Name: FrogModel
   m_TagString: Untagged
@@ -128,6 +129,22 @@ MonoBehaviour:
   onRewardGiven:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3018901035458138720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239382943578289995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf365bfe01bd9748b0d2c1782e06768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: edda18fb99094904daf831705f4ce844, type: 3}
+  volume: 1
+  pitchMin: 1
+  pitchMax: 1
 --- !u!1 &1439449294106713183
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +241,7 @@ GameObject:
   - component: {fileID: 2766143815235392984}
   - component: {fileID: 6382784343474710704}
   - component: {fileID: 4602044390663280955}
+  - component: {fileID: 7234719977260363440}
   m_Layer: 0
   m_Name: LoveModel
   m_TagString: Untagged
@@ -340,6 +358,22 @@ MonoBehaviour:
   onRewardGiven:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7234719977260363440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2524126828635839162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf365bfe01bd9748b0d2c1782e06768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: a64315d62b1e2754cbeaf93519454e1f, type: 3}
+  volume: 2
+  pitchMin: 1
+  pitchMax: 1
 --- !u!1 &3439233993272865898
 GameObject:
   m_ObjectHideFlags: 0

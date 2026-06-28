@@ -1967,7 +1967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &275985490
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2811,6 +2811,22 @@ MonoBehaviour:
   duration: 0.5
   strength: 0.3
   startDelay: 0.7
+--- !u!114 &473522408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473522405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf365bfe01bd9748b0d2c1782e06768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 7a975117354ae9a4ebd5703033f71b3f, type: 3}
+  volume: 1
+  pitchMin: 1
+  pitchMax: 1
 --- !u!1 &475341556
 GameObject:
   m_ObjectHideFlags: 0
@@ -3237,7 +3253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &498874766
 Transform:
   m_ObjectHideFlags: 0
@@ -16205,13 +16221,14 @@ GameObject:
   - component: {fileID: 869376402}
   - component: {fileID: 869376401}
   - component: {fileID: 869376403}
+  - component: {fileID: 869376404}
   m_Layer: 0
   m_Name: FrogPower
   m_TagString: Frog
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &869376398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16361,6 +16378,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnetRadius: 8
   pullSpeed: 10
+--- !u!114 &869376404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869376397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf365bfe01bd9748b0d2c1782e06768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: e50f9e274840a72458766cb1c96f46c2, type: 3}
+  volume: 1
+  pitchMin: 1
+  pitchMax: 1
 --- !u!1 &869504161
 GameObject:
   m_ObjectHideFlags: 0
@@ -18539,6 +18572,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6309599118117444192, guid: e8bae36b607017047ace9061609051d9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 473522407}
+    - targetCorrespondingSourceObject: {fileID: 6309599118117444192, guid: e8bae36b607017047ace9061609051d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 473522408}
   m_SourcePrefab: {fileID: 100100000, guid: e8bae36b607017047ace9061609051d9, type: 3}
 --- !u!1 &1032282368
 GameObject:
@@ -19427,7 +19463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1135502559
 Transform:
   m_ObjectHideFlags: 0
@@ -29927,13 +29963,14 @@ GameObject:
   - component: {fileID: 2059104356}
   - component: {fileID: 2059104357}
   - component: {fileID: 2059104358}
+  - component: {fileID: 2059104359}
   m_Layer: 0
   m_Name: LovePower
   m_TagString: Love
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2059104353
 Transform:
   m_ObjectHideFlags: 0
@@ -30086,6 +30123,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnetRadius: 8
   pullSpeed: 10
+--- !u!114 &2059104359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059104352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf365bfe01bd9748b0d2c1782e06768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: a06c406af5fea37409c7bf9a1b68a689, type: 3}
+  volume: 1
+  pitchMin: 1
+  pitchMax: 1
 --- !u!1 &2065781906
 GameObject:
   m_ObjectHideFlags: 0

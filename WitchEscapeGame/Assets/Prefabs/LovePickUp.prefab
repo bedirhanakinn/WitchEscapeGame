@@ -135,6 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectibleType: 1
+  pickupSound: {fileID: 8300000, guid: ffa201b6d81f1be469287b2fdd838cd1, type: 3}
+  soundVolume: 1
 --- !u!1001 &4725874291636948469
 PrefabInstance:
   m_ObjectHideFlags: 0

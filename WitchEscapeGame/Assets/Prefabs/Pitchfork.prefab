@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7076003966245938563}
   - component: {fileID: -4548971197980529615}
   - component: {fileID: -349467231080933599}
+  - component: {fileID: 3680518692342050274}
   m_Layer: 0
   m_Name: Pitchfork
   m_TagString: Stumble
@@ -154,6 +155,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: {x: 0, y: 0, z: 10}
+--- !u!114 &3680518692342050274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798731361680081394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf365bfe01bd9748b0d2c1782e06768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: a563adbfb1668ce4fa24474529da44fa, type: 3}
+  volume: 1
+  pitchMin: 0.9
+  pitchMax: 1.5
 --- !u!1 &2324903431564661720
 GameObject:
   m_ObjectHideFlags: 0
