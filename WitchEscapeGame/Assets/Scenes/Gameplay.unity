@@ -11431,8 +11431,11 @@ MonoBehaviour:
   sector4:
   - {fileID: 9068004389826555079, guid: e27874dd465aa87459af83e1e3a16cfb, type: 3}
   - {fileID: 9068004389826555079, guid: cd17abd05cebddf4b891f0c554d1ccd3, type: 3}
-  sector5:
   - {fileID: 9068004389826555079, guid: 7ee55a3d65dd96142aa9caecb1292f64, type: 3}
+  - {fileID: 9068004389826555079, guid: 304ef0a22a2d6584d914df116fbc39d3, type: 3}
+  sector5:
+  - {fileID: 9068004389826555079, guid: 8ecd7d5175858fa4994ac19fc28c3071, type: 3}
+  - {fileID: 9068004389826555079, guid: 8f167611a354fc045adf87bf49591c86, type: 3}
 --- !u!4 &824950449
 Transform:
   m_ObjectHideFlags: 0
