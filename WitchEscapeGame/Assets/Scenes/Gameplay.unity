@@ -1766,9 +1766,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1008718510}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: QuitRun
+      - m_Target: {fileID: 201154684}
+        m_TargetAssemblyTypeName: ButtonSFX, Assembly-CSharp
+        m_MethodName: PlayClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1778,9 +1778,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 201154684}
-        m_TargetAssemblyTypeName: ButtonSFX, Assembly-CSharp
-        m_MethodName: PlayClick
+      - m_Target: {fileID: 1008718510}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: QuitRun
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3376,6 +3376,7 @@ GameObject:
   - component: {fileID: 498874769}
   - component: {fileID: 498874770}
   - component: {fileID: 498874771}
+  - component: {fileID: 498874772}
   m_Layer: 0
   m_Name: PlayerStumble
   m_TagString: Player
@@ -3519,6 +3520,19 @@ MonoBehaviour:
   volume: 1
   pitchMin: 1
   pitchMax: 1
+--- !u!114 &498874772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498874765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edab95b78c52b14081711b52154cd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.05
 --- !u!1 &509833441
 GameObject:
   m_ObjectHideFlags: 0
@@ -10502,6 +10516,7 @@ GameObject:
   - component: {fileID: 774119026}
   - component: {fileID: 774119025}
   - component: {fileID: 774119028}
+  - component: {fileID: 774119029}
   m_Layer: 5
   m_Name: MusicButton
   m_TagString: Untagged
@@ -10573,6 +10588,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 774119029}
+        m_TargetAssemblyTypeName: AudioToggleButton, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 774119028}
         m_TargetAssemblyTypeName: ButtonSFX, Assembly-CSharp
         m_MethodName: PlayClick
@@ -10639,6 +10666,21 @@ MonoBehaviour:
   volume: 2
   pitchMin: 1
   pitchMax: 1
+--- !u!114 &774119029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774119023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b893ad531e5dbb64b85970854a4238d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioType: 0
+  onSprite: {fileID: 21300000, guid: 18eb11350adc14ce08d5280b5b8541d7, type: 3}
+  offSprite: {fileID: 21300000, guid: d25cd337868a9fe148868c2a9cecf137, type: 3}
 --- !u!1 &779770711
 GameObject:
   m_ObjectHideFlags: 0
@@ -10652,6 +10694,7 @@ GameObject:
   - component: {fileID: 779770712}
   - component: {fileID: 779770715}
   - component: {fileID: 779770716}
+  - component: {fileID: 779770717}
   m_Layer: 5
   m_Name: VibrationButton
   m_TagString: Untagged
@@ -10761,9 +10804,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 475341558}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: ToggleVibration
+      - m_Target: {fileID: 779770716}
+        m_TargetAssemblyTypeName: ButtonSFX, Assembly-CSharp
+        m_MethodName: PlayClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10773,9 +10816,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 779770716}
-        m_TargetAssemblyTypeName: ButtonSFX, Assembly-CSharp
-        m_MethodName: PlayClick
+      - m_Target: {fileID: 779770717}
+        m_TargetAssemblyTypeName: VibrationButton, Assembly-CSharp
+        m_MethodName: ToggleVibration
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10801,6 +10844,21 @@ MonoBehaviour:
   volume: 2
   pitchMin: 1
   pitchMax: 1
+--- !u!114 &779770717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779770711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd11a977424e904c92454cf357610e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 779770712}
+  onSprite: {fileID: 21300000, guid: 9cef2f7eeab34d9ab93f2240d04fd970, type: 3}
+  offSprite: {fileID: 21300000, guid: d25cd337868a9fe148868c2a9cecf137, type: 3}
 --- !u!1 &783911375
 GameObject:
   m_ObjectHideFlags: 0
@@ -16471,6 +16529,7 @@ GameObject:
   - component: {fileID: 869376401}
   - component: {fileID: 869376403}
   - component: {fileID: 869376404}
+  - component: {fileID: 869376405}
   m_Layer: 0
   m_Name: FrogPower
   m_TagString: Frog
@@ -16644,6 +16703,19 @@ MonoBehaviour:
   volume: 1
   pitchMin: 1
   pitchMax: 1
+--- !u!114 &869376405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869376397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edab95b78c52b14081711b52154cd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.05
 --- !u!1 &869504161
 GameObject:
   m_ObjectHideFlags: 0
@@ -19087,6 +19159,7 @@ GameObject:
   - component: {fileID: 1065545960}
   - component: {fileID: 1065545959}
   - component: {fileID: 1065545962}
+  - component: {fileID: 1065545963}
   m_Layer: 5
   m_Name: VibrationButton
   m_TagString: Untagged
@@ -19170,6 +19243,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1065545963}
+        m_TargetAssemblyTypeName: VibrationButton, Assembly-CSharp
+        m_MethodName: ToggleVibration
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1065545960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19224,6 +19309,21 @@ MonoBehaviour:
   volume: 2
   pitchMin: 1
   pitchMax: 1
+--- !u!114 &1065545963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065545957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd11a977424e904c92454cf357610e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 1065545960}
+  onSprite: {fileID: 21300000, guid: 9cef2f7eeab34d9ab93f2240d04fd970, type: 3}
+  offSprite: {fileID: 21300000, guid: d25cd337868a9fe148868c2a9cecf137, type: 3}
 --- !u!1 &1084391942
 GameObject:
   m_ObjectHideFlags: 0
@@ -19870,6 +19970,7 @@ GameObject:
   - component: {fileID: 1135502561}
   - component: {fileID: 1135502562}
   - component: {fileID: 1135502563}
+  - component: {fileID: 1135502564}
   m_Layer: 0
   m_Name: PlayerDeath
   m_TagString: Untagged
@@ -19992,6 +20093,19 @@ MonoBehaviour:
   volume: 1
   pitchMin: 1
   pitchMax: 1
+--- !u!114 &1135502564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135502558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edab95b78c52b14081711b52154cd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.05
 --- !u!1 &1145243681
 GameObject:
   m_ObjectHideFlags: 0
@@ -30497,6 +30611,7 @@ GameObject:
   - component: {fileID: 2059104357}
   - component: {fileID: 2059104358}
   - component: {fileID: 2059104359}
+  - component: {fileID: 2059104360}
   m_Layer: 0
   m_Name: LovePower
   m_TagString: Love
@@ -30672,6 +30787,19 @@ MonoBehaviour:
   volume: 1
   pitchMin: 1
   pitchMax: 1
+--- !u!114 &2059104360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059104352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edab95b78c52b14081711b52154cd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.05
 --- !u!1 &2065781906
 GameObject:
   m_ObjectHideFlags: 0
@@ -30719,6 +30847,7 @@ GameObject:
   - component: {fileID: 2080491842}
   - component: {fileID: 2080491841}
   - component: {fileID: 2080491844}
+  - component: {fileID: 2080491845}
   m_Layer: 5
   m_Name: SFXButton
   m_TagString: Untagged
@@ -30790,6 +30919,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 2080491845}
+        m_TargetAssemblyTypeName: AudioToggleButton, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2080491844}
         m_TargetAssemblyTypeName: ButtonSFX, Assembly-CSharp
         m_MethodName: PlayClick
@@ -30856,6 +30997,21 @@ MonoBehaviour:
   volume: 2
   pitchMin: 1
   pitchMax: 1
+--- !u!114 &2080491845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080491839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b893ad531e5dbb64b85970854a4238d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioType: 1
+  onSprite: {fileID: 21300000, guid: 0240f23a821f1e1498ec923e963f72c3, type: 3}
+  offSprite: {fileID: 21300000, guid: d25cd337868a9fe148868c2a9cecf137, type: 3}
 --- !u!1 &2082692334
 GameObject:
   m_ObjectHideFlags: 0
