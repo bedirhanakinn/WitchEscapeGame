@@ -15,17 +15,18 @@ MonoBehaviour:
   skinId: glowing
   displayName: Glowing Witch
   upSprites:
-  - {fileID: 21300000, guid: d9cf0b736fff20845add49a50b29dc54, type: 3}
-  - {fileID: 21300000, guid: 61c068af64a81dc40a80b76283045832, type: 3}
+  - {fileID: 21300000, guid: 6db4b126ffa0b254fb1acc81a68e2df1, type: 3}
+  - {fileID: 21300000, guid: 1d70e030459ac064f8b02ab919821b94, type: 3}
   downSprites:
-  - {fileID: 21300000, guid: 2178118c857654f45970e097cb7e8892, type: 3}
-  - {fileID: 21300000, guid: fa0050b394d36624d9f0420529f43e05, type: 3}
-  throwSprites: []
+  - {fileID: 21300000, guid: 641677c281bd5d24583cc2fa325a59aa, type: 3}
+  - {fileID: 21300000, guid: 64c891e747d70444da869a07f6930047, type: 3}
+  throwSprites:
+  - {fileID: 21300000, guid: 6db4b126ffa0b254fb1acc81a68e2df1, type: 3}
   stumbleSprites:
-  - {fileID: 21300000, guid: 5931c34a1e71ade45b70224ad3c1fbac, type: 3}
-  - {fileID: 21300000, guid: b3cd85b783c0d514dad31c5463a2fe99, type: 3}
+  - {fileID: 21300000, guid: dc828cacea218ed4c8aa62c9ea1c24e0, type: 3}
+  - {fileID: 21300000, guid: 1d306e3c62ee6644b8a7d21bd18cce36, type: 3}
   deathSprites:
-  - {fileID: 21300000, guid: c409c07dc9b0d4f40a58b6afa038918c, type: 3}
+  - {fileID: 21300000, guid: a2deac2cd0e48f44187af070fb4d102c, type: 3}
   burningSprites:
   - {fileID: 21300000, guid: 1c70054c9269a3149a280600577b3d08, type: 3}
   - {fileID: 21300000, guid: e3015918f303df34da3c29ebd8b63597, type: 3}
