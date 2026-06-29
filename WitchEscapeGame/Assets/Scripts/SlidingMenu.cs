@@ -42,6 +42,7 @@ public class SlidingMenu : MonoBehaviour
     private RectTransform _rt;
     private Coroutine _slideRoutine;
     private bool _isShown;
+    private bool _gameStarted; // arrows never re-appear once a run has started
 
     void Awake()
     {
@@ -64,6 +65,7 @@ public class SlidingMenu : MonoBehaviour
     /// </summary>
     public void HideArrows()
     {
+        _gameStarted = true;
         if (upArrow != null) upArrow.SetActive(false);
         if (downArrow != null) downArrow.SetActive(false);
     }
@@ -136,6 +138,8 @@ public class SlidingMenu : MonoBehaviour
     /// </summary>
     private void UpdateArrowVisibility()
     {
+        // Never re-show arrows once a run has started.
+        if (_gameStarted) return;
         if (upArrow != null) upArrow.SetActive(!_isShown);
         if (downArrow != null) downArrow.SetActive(_isShown);
     }
