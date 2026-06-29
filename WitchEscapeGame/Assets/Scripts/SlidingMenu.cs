@@ -1,48 +1,53 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
-/// Slides a menu container vertically between a "shown" and "hidden" position
-/// when the up/down arrow buttons are pressed.
+/// Slides a cloud menu panel vertically between a shown and hidden position.
+/// A SINGLE toggle button (child of the panel, so it moves with it) flips its
+/// icon between a down-chevron (pull menu down) and up-chevron (push menu up).
 ///
-/// Attach to the MenuContainer (the panel that holds Shop/Settings/Credits).
-/// Wire the two arrow buttons' onClick to ShowMenu() and HideMenu().
+/// When hidden, the panel sits above the screen with only the toggle button
+/// peeking down below the top edge, so the player can pull it back down.
 ///
-/// Movement is driven by RectTransform.anchoredPosition, animated with an
-/// unscaled-time lerp so it works on menus regardless of Time.timeScale.
+/// Attach to the cloud panel (the RectTransform that holds the 3 buttons + toggle).
+/// Wire the toggle button's onClick to Toggle().
 /// </summary>
 [RequireComponent(typeof(RectTransform))]
 public class SlidingMenu : MonoBehaviour
 {
     [Header("Positions (anchored Y)")]
-    [Tooltip("Y position when the menu is fully visible on screen.")]
+    [Tooltip("Y when the menu is fully visible (pulled down).")]
     [SerializeField] private float shownY = 0f;
 
-    [Tooltip("Y position when the menu is slid away off-screen. " +
-             "For a slide-down-to-hide, this is a large negative number.")]
-    [SerializeField] private float hiddenY = -1200f;
+    [Tooltip("Y when hidden (pushed up). Positive pushes the panel above the screen, " +
+             "leaving only the toggle button peeking below the top edge.")]
+    [SerializeField] private float hiddenY = 1000f;
 
     [Header("Animation")]
-    [Tooltip("Seconds the slide takes.")]
     [SerializeField] private float slideDuration = 0.35f;
-
-    [Tooltip("Eased motion (smoothstep) vs linear.")]
     [SerializeField] private bool useEasing = true;
 
     [Header("Start State")]
-    [Tooltip("If true, the menu starts shown. If false, starts hidden.")]
+    [Tooltip("If true the menu starts shown (pulled down).")]
     [SerializeField] private bool startShown = true;
 
-    [Header("Arrow Buttons (optional auto-hide)")]
-    [Tooltip("The 'up' arrow that shows the menu. Hidden when menu is already shown.")]
-    [SerializeField] private GameObject upArrow;
-    [Tooltip("The 'down' arrow that hides the menu. Hidden when menu is already hidden.")]
-    [SerializeField] private GameObject downArrow;
+    [Header("Toggle Button Icon")]
+    [Tooltip("The Image on the toggle button whose sprite we swap.")]
+    [SerializeField] private Image toggleIcon;
+    [Tooltip("Icon shown when the menu is SHOWN (press to push it up).")]
+    [SerializeField] private Sprite upIconSprite;
+    [Tooltip("Icon shown when the menu is HIDDEN (press to pull it down).")]
+    [SerializeField] private Sprite downIconSprite;
+
+    [Header("Toggle Button (hide on run start)")]
+    [Tooltip("The whole toggle button GameObject — hidden when a run starts.")]
+    [SerializeField] private GameObject toggleButton;
 
     private RectTransform _rt;
     private Coroutine _slideRoutine;
     private bool _isShown;
-    private bool _gameStarted; // arrows never re-appear once a run has started
+    private bool _gameStarted;
 
     void Awake()
     {
@@ -51,62 +56,42 @@ public class SlidingMenu : MonoBehaviour
 
     void Start()
     {
-        // Snap to the initial state without animating.
         _isShown = startShown;
         Vector2 pos = _rt.anchoredPosition;
         pos.y = _isShown ? shownY : hiddenY;
         _rt.anchoredPosition = pos;
-        UpdateArrowVisibility();
+        UpdateToggleIcon();
     }
 
-    /// <summary>
-    /// Hides both arrow buttons. Wire this to GameStart.onGameStarted so the
-    /// arrows disappear when the player starts a run.
-    /// </summary>
-    public void HideArrows()
+    /// <summary>Wire the toggle button's onClick to this single method.</summary>
+    public void Toggle()
     {
-        _gameStarted = true;
-        if (upArrow != null) upArrow.SetActive(false);
-        if (downArrow != null) downArrow.SetActive(false);
+        if (_isShown) Hide();
+        else Show();
     }
 
-    /// <summary>Wire the UP arrow button's onClick here.</summary>
-    public void ShowMenu()
+    public void Show()
     {
         if (_isShown) return;
         _isShown = true;
         StartSlide(shownY);
     }
 
-    /// <summary>Wire the DOWN arrow button's onClick here.</summary>
-    public void HideMenu()
+    public void Hide()
     {
         if (!_isShown) return;
         _isShown = false;
         StartSlide(hiddenY);
     }
 
-    /// <summary>Toggle — handy if you ever want a single button.</summary>
-    public void ToggleMenu()
-    {
-        if (_isShown) HideMenu();
-        else ShowMenu();
-    }
-
     private void StartSlide(float targetY)
     {
         if (_slideRoutine != null) StopCoroutine(_slideRoutine);
         _slideRoutine = StartCoroutine(SlideTo(targetY));
-        // Arrow swap is delayed to end of slide — see SlideTo below.
     }
 
     private IEnumerator SlideTo(float targetY)
     {
-        // Hide BOTH arrows at the start of the slide so neither flickers
-        // or disappears awkwardly mid-animation.
-        if (upArrow != null) upArrow.SetActive(false);
-        if (downArrow != null) downArrow.SetActive(false);
-
         Vector2 start = _rt.anchoredPosition;
         float startY = start.y;
         float elapsed = 0f;
@@ -115,7 +100,7 @@ public class SlidingMenu : MonoBehaviour
         {
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / slideDuration);
-            if (useEasing) t = t * t * (3f - 2f * t); // smoothstep
+            if (useEasing) t = t * t * (3f - 2f * t);
 
             Vector2 pos = _rt.anchoredPosition;
             pos.y = Mathf.Lerp(startY, targetY, t);
@@ -128,19 +113,28 @@ public class SlidingMenu : MonoBehaviour
         _rt.anchoredPosition = final;
         _slideRoutine = null;
 
-        // NOW show the correct arrow for the new state.
-        UpdateArrowVisibility();
+        // Flip the icon at the end of the slide so it matches the new state.
+        UpdateToggleIcon();
     }
 
     /// <summary>
-    /// Shows the relevant arrow for the current state (up arrow when hidden,
-    /// down arrow when shown). Optional — only runs if arrows are assigned.
+    /// Sets the toggle icon: up-chevron while shown (press to push up),
+    /// down-chevron while hidden (press to pull down).
     /// </summary>
-    private void UpdateArrowVisibility()
+    private void UpdateToggleIcon()
     {
-        // Never re-show arrows once a run has started.
-        if (_gameStarted) return;
-        if (upArrow != null) upArrow.SetActive(!_isShown);
-        if (downArrow != null) downArrow.SetActive(_isShown);
+        if (toggleIcon == null) return;
+        if (_isShown && upIconSprite != null) toggleIcon.sprite = upIconSprite;
+        else if (!_isShown && downIconSprite != null) toggleIcon.sprite = downIconSprite;
+    }
+
+    /// <summary>
+    /// Wire to GameStart.onGameStarted. Hides the toggle button so it doesn't
+    /// linger on screen during gameplay.
+    /// </summary>
+    public void HideArrows()
+    {
+        _gameStarted = true;
+        if (toggleButton != null) toggleButton.SetActive(false);
     }
 }
