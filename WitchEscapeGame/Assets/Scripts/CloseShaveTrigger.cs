@@ -11,12 +11,19 @@ public class CloseShaveTrigger : MonoBehaviour
 
     [SerializeField] private string playerTag = "Player";
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip closeShaveSound;
+    [SerializeField] private float soundVolume = 1f;
+    [SerializeField] private float minPitch = 0.95f;
+    [SerializeField] private float maxPitch = 1.10f;
+
     private bool fired;
 
     void Reset()
     {
         var col = GetComponent<Collider2D>();
-        if (col != null) col.isTrigger = true;
+        if (col != null)
+            col.isTrigger = true;
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -27,6 +34,14 @@ public class CloseShaveTrigger : MonoBehaviour
         if (Time.timeScale <= 0) return;
 
         fired = true;
+
+        // Play Close Shave sound
+        if (closeShaveSound != null)
+        {
+            float pitch = Random.Range(minPitch, maxPitch);
+            SoundManager.Instance.PlaySFX(closeShaveSound, soundVolume, pitch);
+        }
+
         int bonus = customBonus > 0 ? customBonus : 500;
         ScoreManager.Instance.AddBonus(bonus, label);
     }

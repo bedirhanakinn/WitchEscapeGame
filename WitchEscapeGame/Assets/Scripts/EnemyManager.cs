@@ -14,6 +14,11 @@ public class EnemyManager : MonoBehaviour
     public Sprite[] potionSprites;
     public float potionFrameRate = 0.05f;
 
+    [Header("Potion Sound")]
+    public AudioClip potionSound;
+    [Range(0f, 1f)]
+    public float potionSoundVolume = 1f;
+
     [Header("Transformations")]
     public GameObject loveChild;
     public GameObject frogChild;
@@ -77,6 +82,12 @@ public class EnemyManager : MonoBehaviour
         if (other.CompareTag(potionTag))
         {
             stateLocked = true;
+
+            // Play potion transformation sound
+            if (potionSound != null)
+            {
+                SoundManager.Instance.PlaySFX(potionSound, potionSoundVolume);
+            }
 
             if (currentAnimation != null)
                 StopCoroutine(currentAnimation);

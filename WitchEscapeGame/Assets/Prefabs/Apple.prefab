@@ -83,6 +83,10 @@ MonoBehaviour:
   customBonus: 0
   label: Close Shave!
   playerTag: Player
+  closeShaveSound: {fileID: 8300000, guid: ffa201b6d81f1be469287b2fdd838cd1, type: 3}
+  soundVolume: 1
+  minPitch: 0.95
+  maxPitch: 1.1
 --- !u!1 &4099579847275437282
 GameObject:
   m_ObjectHideFlags: 0
