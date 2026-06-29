@@ -4992,6 +4992,8 @@ MonoBehaviour:
   potionSprites:
   - {fileID: 21300000, guid: 2128cb364b49b5c4fab209339fffb6aa, type: 3}
   potionFrameRate: 0.02
+  potionSound: {fileID: 8300000, guid: 8ccd4a11941db65408ecb9f470ccec66, type: 3}
+  potionSoundVolume: 1
   loveChild: {fileID: 7696584294600930667}
   frogChild: {fileID: 6044681800225462526}
   transformDelay: 0.2

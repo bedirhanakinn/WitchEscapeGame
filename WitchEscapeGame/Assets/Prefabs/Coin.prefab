@@ -86,7 +86,7 @@ MonoBehaviour:
   pickupSound: {fileID: 8300000, guid: d265efe58f8add342928475403d182f8, type: 3}
   soundVolume: 1
   minPitch: 1.15
-  maxPitch: 1.75
+  maxPitch: 2.15
   pickupVfxPrefab: {fileID: 0}
 --- !u!1 &3286522129545508290
 GameObject:

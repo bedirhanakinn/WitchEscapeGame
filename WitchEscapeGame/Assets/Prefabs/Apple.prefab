@@ -97,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6168077587774113364}
   - component: {fileID: 2107547499616401832}
+  - component: {fileID: 1258289098202014203}
   m_Layer: 0
   m_Name: CloseShaveBottom
   m_TagString: Untagged
@@ -154,6 +155,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.4325321}
   serializedVersion: 2
   m_Radius: 0.31746784
+--- !u!114 &1258289098202014203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099579847275437282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3625c35af9f333fa35437a4b56922a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customBonus: 0
+  label: Close Shave!
+  playerTag: Player
+  closeShaveSound: {fileID: 8300000, guid: ffa201b6d81f1be469287b2fdd838cd1, type: 3}
+  soundVolume: 1
+  minPitch: 0.95
+  maxPitch: 1.1
 --- !u!1 &7134111587931995853
 GameObject:
   m_ObjectHideFlags: 0
