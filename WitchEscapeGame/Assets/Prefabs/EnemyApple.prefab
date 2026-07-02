@@ -476,7 +476,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 39ea9ca79a1713d44ab53eeacc9ddace, type: 3}
   throwFrameRate: 0.05
   potionSprites:
-  - {fileID: 21300000, guid: 2128cb364b49b5c4fab209339fffb6aa, type: 3}
+  - {fileID: 21300000, guid: 5b7f725408aec0446b0d0207aeebb296, type: 3}
   potionFrameRate: 0.02
   potionSound: {fileID: 8300000, guid: e61ea75d8423dc44d9967bcb8e77528e, type: 3}
   potionSoundVolume: 1

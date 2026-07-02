@@ -10219,7 +10219,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ec0c561632a3f39498d4146fd57f2c44, type: 3}
   throwFrameRate: 0.02
   potionSprites:
-  - {fileID: 21300000, guid: 2128cb364b49b5c4fab209339fffb6aa, type: 3}
+  - {fileID: 21300000, guid: beda04204a24eb14c9be780b0cf5b6b8, type: 3}
   potionFrameRate: 0.05
   potionSound: {fileID: 8300000, guid: 9e4ef6d01de915b4781fd269362ccd91, type: 3}
   potionSoundVolume: 1
