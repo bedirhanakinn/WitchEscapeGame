@@ -1091,7 +1091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &116043238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20383,6 +20383,57 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1146820441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1146820443}
+  - component: {fileID: 1146820442}
+  m_Layer: 0
+  m_Name: LevelPlayAdProvider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1146820442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146820441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0301719fc756a74c8e89120c1e41bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  androidAppKey: 2707cc80d
+  iosAppKey: 2707d0195
+  androidRewardedAdUnitId: gsqr6q9t3bcqs5c2
+  iosRewardedAdUnitId: x252ykyp53a148h6
+  placementName: 
+  rewardGraceSeconds: 0.75
+  loadRetrySeconds: 4
+--- !u!4 &1146820443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146820441}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 480.4891, y: 241.65086, z: 1.6101267}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1150768758
 GameObject:
   m_ObjectHideFlags: 0
@@ -31661,6 +31712,7 @@ SceneRoots:
   - {fileID: 1128907584}
   - {fileID: 415883907}
   - {fileID: 753560300}
+  - {fileID: 1146820443}
   - {fileID: 1944198684}
   - {fileID: 546097396}
   - {fileID: 146716519}
