@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AutoSFX : MonoBehaviour
@@ -12,8 +13,16 @@ public class AutoSFX : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(PlayWhenReady());
+    }
+
+    private IEnumerator PlayWhenReady()
+    {
+        // Wait one frame so SoundManager has time to initialize
+        yield return null;
+
         if (SoundManager.Instance == null || sound == null)
-            return;
+            yield break;
 
         float pitch = Random.Range(pitchMin, pitchMax);
 

@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97934ce3cb9dcc4ca2de19b8bcb67be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickSound: {fileID: 8300000, guid: a64315d62b1e2754cbeaf93519454e1f, type: 3}
+  clickSound: {fileID: 8300000, guid: ffa201b6d81f1be469287b2fdd838cd1, type: 3}
   volume: 1
   pitchMin: 1
   pitchMax: 1

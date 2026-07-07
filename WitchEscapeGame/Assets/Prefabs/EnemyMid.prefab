@@ -15138,7 +15138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: b2d60dca239cd7f4da17e4f8d31e3c68, type: 3}
-  volume: 1
+  volume: 0.7
   pitchMin: 1
   pitchMax: 1
 --- !u!1001 &3069001201726478061

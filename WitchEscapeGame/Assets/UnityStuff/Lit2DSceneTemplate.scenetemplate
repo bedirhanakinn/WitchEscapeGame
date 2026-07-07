@@ -800,6 +800,8 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 6430119279636018801, guid: 6a9ccf5128b7b1349a5a89b136f037a4, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 8300000, guid: 56063be5820132e489ee035b3e9d43d1, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 8183758440019976681, guid: c759bb922e42eda4eb6f7e6e4e2fbe63, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 982056747370159609, guid: 86d38be4937d1c344b9c7f22912685eb, type: 3}
