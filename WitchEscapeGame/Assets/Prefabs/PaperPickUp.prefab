@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectibleType: 2
-  pickupSound: {fileID: 8300000, guid: ffa201b6d81f1be469287b2fdd838cd1, type: 3}
+  pickupSound: {fileID: 8300000, guid: 839ce521efeddd84a87458db138cdc8b, type: 3}
   soundVolume: 1
 --- !u!114 &308862250795393884
 MonoBehaviour:
@@ -185,8 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 2
-  upSpeed: 3
-  downSpeed: 3
+  upSpeed: 2
+  downSpeed: 2
   useLocalPosition: 1
 --- !u!1001 &4725874291636948469
 PrefabInstance:
