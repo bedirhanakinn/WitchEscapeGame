@@ -22,16 +22,18 @@ public class EnemyManager : MonoBehaviour
     [Header("Transformations")]
     public GameObject loveChild;
     public GameObject frogChild;
+    public GameObject lightningChild;
     public float transformDelay = 0.5f;
 
     [Header("Reward")]
-    public MonoBehaviour rewardGiver; // Drag your RewardGiver component here
+    public MonoBehaviour rewardGiver;
 
     [Header("Tags")]
     public string playerTag = "Player";
     public string potionTag = "Potion";
     public string loveTag = "Love";
     public string frogTag = "Frog";
+    public string lightningTag = "Lightning";
 
     private SpriteRenderer spriteRenderer;
 
@@ -45,24 +47,19 @@ public class EnemyManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (projectile != null)
-        {
             projectile.SetActive(false);
-        }
 
         if (loveChild != null)
-        {
             loveChild.SetActive(false);
-        }
 
         if (frogChild != null)
-        {
             frogChild.SetActive(false);
-        }
+
+        if (lightningChild != null)
+            lightningChild.SetActive(false);
 
         if (rewardGiver != null)
-        {
             rewardGiver.enabled = false;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -113,6 +110,14 @@ public class EnemyManager : MonoBehaviour
         {
             stateLocked = true;
             StartCoroutine(TransformToFrog());
+            return;
+        }
+
+        // LIGHTNING
+        if (other.CompareTag(lightningTag))
+        {
+            stateLocked = true;
+            StartCoroutine(TransformToLightning());
             return;
         }
     }
@@ -191,6 +196,16 @@ public class EnemyManager : MonoBehaviour
 
         if (frogChild != null)
             frogChild.SetActive(true);
+
+        spriteRenderer.enabled = false;
+    }
+
+    private IEnumerator TransformToLightning()
+    {
+        yield return new WaitForSeconds(transformDelay);
+
+        if (lightningChild != null)
+            lightningChild.SetActive(true);
 
         spriteRenderer.enabled = false;
     }
