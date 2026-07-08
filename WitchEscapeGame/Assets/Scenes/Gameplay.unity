@@ -18925,6 +18925,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1563852090}
+        m_TargetAssemblyTypeName: UIFader, Assembly-CSharp
+        m_MethodName: Show
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   playerController: {fileID: 696340711}
 --- !u!4 &1008718511
 Transform:
@@ -28933,7 +28945,7 @@ MonoBehaviour:
   scoreText: {fileID: 125910539}
   fader: {fileID: 1563852090}
   format: '{0:N0}'
-  revealAtScore: 350
+  revealAtScore: 200
   countUpRate: 1000
   countUpMaxDuration: 0.8
   countUpMinDelta: 50
