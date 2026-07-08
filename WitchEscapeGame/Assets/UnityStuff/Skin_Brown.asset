@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skin_Brown
   m_EditorClassIdentifier: 
   skinId: brown
-  displayName: Brown Witch
+  displayName: '-'
   upSprites:
   - {fileID: 21300000, guid: 8c1406acb6c83ff69997791a2bd3040d, type: 3}
   - {fileID: 21300000, guid: ed73c282eca0173fcbbbccbe253c74b7, type: 3}
@@ -34,5 +34,5 @@ MonoBehaviour:
   whistlingSprite: {fileID: 21300000, guid: b17f5baf09946d0af83a3ac4182395fe, type: 3}
   lookingUpSprite: {fileID: 21300000, guid: e5d010ab7494988a28c3369f514d88fd, type: 3}
   shopPreview: {fileID: 0}
-  price: 1
+  price: 200
   ownedByDefault: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skin_Purple
   m_EditorClassIdentifier: 
   skinId: purple
-  displayName: Purple Witch
+  displayName: '-'
   upSprites:
   - {fileID: 21300000, guid: 41dd95eeb0c8118ffb6002dac43d8fe7, type: 3}
   - {fileID: 21300000, guid: af0196e58eebc6a24a450d781659a0f3, type: 3}
@@ -34,5 +34,5 @@ MonoBehaviour:
   whistlingSprite: {fileID: 21300000, guid: 8942e2f3787995bd9a3d146cda0452c0, type: 3}
   lookingUpSprite: {fileID: 21300000, guid: 55fa162413de39551b2a58d94c9b38bb, type: 3}
   shopPreview: {fileID: 0}
-  price: 1000
+  price: 100
   ownedByDefault: 0

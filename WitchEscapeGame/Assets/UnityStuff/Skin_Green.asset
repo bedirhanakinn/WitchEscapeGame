@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skin_Green
   m_EditorClassIdentifier: 
   skinId: green
-  displayName: Green Witch
+  displayName: '-'
   upSprites:
   - {fileID: 21300000, guid: b63d43a9318bd774e9c46d155939c583, type: 3}
   - {fileID: 21300000, guid: 94bcd7b63c575e64291c8b083c991b37, type: 3}
@@ -34,5 +34,5 @@ MonoBehaviour:
   whistlingSprite: {fileID: 21300000, guid: 7cd0573d39ab231478a71d47c71b72eb, type: 3}
   lookingUpSprite: {fileID: 21300000, guid: 48dfa6a437a37584da7b1be0c68c0a07, type: 3}
   shopPreview: {fileID: 0}
-  price: 1
+  price: 400
   ownedByDefault: 0

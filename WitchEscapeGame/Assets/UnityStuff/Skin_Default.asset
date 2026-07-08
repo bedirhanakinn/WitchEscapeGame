@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skin_Default
   m_EditorClassIdentifier: 
   skinId: default
-  displayName: Default
+  displayName: '-'
   upSprites:
   - {fileID: 21300000, guid: c610b73e14830884b9daab3b0507d8c9, type: 3}
   - {fileID: 21300000, guid: 5457ea4b9f89e064a9d00baf1ad72c10, type: 3}

@@ -2836,7 +2836,7 @@ MonoBehaviour:
   flyGuideDuration: 4
   tapHoldAfterStart: 3
   swipeGuideDuration: 4
-  maxTutorialPlays: 3
+  maxTutorialPlays: 10000000
 --- !u!1 &449893054
 GameObject:
   m_ObjectHideFlags: 0
@@ -10885,7 +10885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'ad = revive '
+  m_text: ad = revive !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d6b1e5d642f9224fb33ffbe80df95f9, type: 2}
   m_sharedMaterial: {fileID: -7733099009267745640, guid: 2d6b1e5d642f9224fb33ffbe80df95f9, type: 2}
@@ -10894,8 +10894,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287585131
-  m_fontColor: {r: 0.41960788, g: 0.35686275, b: 0.56078434, a: 1}
+    rgba: 4279230692
+  m_fontColor: {r: 0.89433956, g: 0.87897533, b: 0.059060033, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa250a2f45296c5383a858e53882295, type: 3}
+  m_Name: Skin_Huff
+  m_EditorClassIdentifier: 
+  skinId: huff
+  displayName: '-'
+  upSprites:
+  - {fileID: 21300000, guid: ff2a517206e379f44b8fc124bd99c9e5, type: 3}
+  - {fileID: 21300000, guid: 4245d51c37aeba64c8ef6dc28595cfa9, type: 3}
+  downSprites:
+  - {fileID: 21300000, guid: d7c2fe0e6b0a8c54ea6b1833192e04b1, type: 3}
+  - {fileID: 21300000, guid: 1a4f6b14899f1ba43af387fa920ae34e, type: 3}
+  throwSprites:
+  - {fileID: 21300000, guid: ff2a517206e379f44b8fc124bd99c9e5, type: 3}
+  stumbleSprites:
+  - {fileID: 21300000, guid: 4f73dffe803005a4e9a942893b4deac7, type: 3}
+  - {fileID: 21300000, guid: 93a2c8758771f0a46a0e86c386278e76, type: 3}
+  deathSprites:
+  - {fileID: 21300000, guid: fa308b0483ea0b540a79911c433d197f, type: 3}
+  burningSprites:
+  - {fileID: 21300000, guid: 8e6295f6c95f21e47827239a8fe12ff1, type: 3}
+  - {fileID: 21300000, guid: 4f241fb67fa0a7a4dbda675dd5ac5e7f, type: 3}
+  - {fileID: 21300000, guid: 5f990a433ef63b54cb9e5d7f72bd6283, type: 3}
+  whistlingSprite: {fileID: 21300000, guid: fb80a48d834f6804e9d38a77f4200514, type: 3}
+  lookingUpSprite: {fileID: 21300000, guid: 3c650c08e2d590b44a2a9f439edb1479, type: 3}
+  shopPreview: {fileID: 0}
+  price: 500
+  ownedByDefault: 0
