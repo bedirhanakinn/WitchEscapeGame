@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55bb60694047524ca76a092b5bb7eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adProviderBehaviour: {fileID: 546097395}
+  adProviderBehaviour: {fileID: 1146820442}
   countdownFrom: 3
   countdownStepSeconds: 1
   onReviveComplete:
