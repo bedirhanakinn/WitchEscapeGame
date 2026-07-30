@@ -79,9 +79,17 @@ public class GameStart : MonoBehaviour
     {
         if (!gameStarted && !isStarting)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (
+                Input.GetMouseButtonDown(0) ||
+                Input.GetKeyDown(KeyCode.W) ||
+                Input.GetKeyDown(KeyCode.D) ||
+                Input.GetKeyDown(KeyCode.Space) ||
+                Input.GetKeyDown(KeyCode.UpArrow) ||
+                Input.GetKeyDown(KeyCode.RightArrow)
+            )
             {
-                if (IsPointerOverBlockedUI())
+                // Only block mouse/touch input when clicking UI
+                if (Input.GetMouseButtonDown(0) && IsPointerOverBlockedUI())
                     return;
 
                 StartGame();

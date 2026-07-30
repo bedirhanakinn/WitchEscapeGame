@@ -11259,7 +11259,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: affe9f4f0686b504ab8ed6780ee1b547, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ccc07f75aae84d3429a9fe2717ab6655, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -11279,7 +11279,7 @@ Transform:
   m_GameObject: {fileID: 783027723}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.39, y: 4.39, z: 2.030922}
+  m_LocalPosition: {x: -27.39, y: 4.56, z: 2.030922}
   m_LocalScale: {x: 1.1061, y: 1.1061, z: 1.1061}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26718,7 +26718,7 @@ MonoBehaviour:
   moveSpeed: 10.5
   despawnX: -200
   startDelay: 1.3
-  witchSwapDelay: 0.5
+  witchSwapDelay: 0.2
   objectsToHideOnStart: []
   objectsToDisable:
   - {fileID: 0}
