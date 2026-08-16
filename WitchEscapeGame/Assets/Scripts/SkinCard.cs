@@ -8,6 +8,8 @@ using UnityEngine.UI;
 /// </summary>
 public class SkinCard : MonoBehaviour
 {
+    public enum LockedSpriteMode { Hide, GreyOut, Off }
+
     // ---- FLAG: field names below (previewImage/nameText) are reconstructed. ----
     [Header("Data Display")]
     [SerializeField] private Image previewImage;
@@ -31,9 +33,14 @@ public class SkinCard : MonoBehaviour
     [SerializeField] private ParticleSystem unlockParticles;
 
     [Header("Lock State")]
-    [SerializeField] private GameObject lockOverlay;        // greyed panel + lock icon, covers the card
+    [SerializeField] private GameObject lockOverlay;        // holds lock icon + message, covers the card
     [SerializeField] private TextMeshProUGUI lockMessage;   // "Buy X more to unlock"
     [SerializeField] private string lockedFormat = "Buy {0} more to unlock";
+
+    [Header("Lock Visual")]
+    [SerializeField] private LockedSpriteMode lockedSpriteMode = LockedSpriteMode.GreyOut;
+    [SerializeField] private Color lockedTint = new Color(0.15f, 0.15f, 0.15f, 1f); // dark silhouette
+    private Color _previewDefaultColor = Color.white;
 
     private SkinData skin;
     private bool _wasOwned;
@@ -44,7 +51,11 @@ public class SkinCard : MonoBehaviour
     {
         skin = data;
 
-        if (previewImage != null) previewImage.sprite = data.GetPreview();
+        if (previewImage != null)
+        {
+            previewImage.sprite = data.GetPreview();
+            _previewDefaultColor = previewImage.color;   // capture default for restore
+        }
         if (nameText != null) nameText.text = data.displayName;
 
         // ---- FLAG: if your button is ALREADY wired to OnActionClicked in the
@@ -103,6 +114,24 @@ public class SkinCard : MonoBehaviour
         {
             if (lockOverlay != null) lockOverlay.SetActive(true);
             if (lockMessage != null) lockMessage.text = string.Format(lockedFormat, _lockNeeded);
+
+            if (previewImage != null)
+            {
+                switch (lockedSpriteMode)
+                {
+                    case LockedSpriteMode.Hide:
+                        previewImage.enabled = false;
+                        break;
+                    case LockedSpriteMode.GreyOut:
+                        previewImage.enabled = true;
+                        previewImage.color = lockedTint;
+                        break;
+                    case LockedSpriteMode.Off:
+                        previewImage.enabled = true;
+                        break;
+                }
+            }
+
             buttonLabel.text = "LOCKED";
             if (priceText != null) priceText.text = "";
             actionButton.interactable = false;
@@ -110,7 +139,14 @@ public class SkinCard : MonoBehaviour
             _wasOwned = SkinManager.Instance.IsOwned(skin.skinId);
             return;
         }
+
+        // Unlocked: restore overlay + sprite to normal.
         if (lockOverlay != null) lockOverlay.SetActive(false);
+        if (previewImage != null)
+        {
+            previewImage.enabled = true;
+            previewImage.color = _previewDefaultColor;
+        }
 
         bool owned = SkinManager.Instance.IsOwned(skin.skinId);
         bool equipped = SkinManager.Instance.IsEquipped(skin);
