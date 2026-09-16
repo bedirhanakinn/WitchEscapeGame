@@ -13,8 +13,7 @@ public class PowerUpManager : MonoBehaviour
     public GameObject deathModel;
 
     [Header("Power Ups")]
-    public List<PowerUpData> powerUps =
-        new List<PowerUpData>();
+    public List<PowerUpData> powerUps = new List<PowerUpData>();
 
     [Header("UI")]
     public PowerUpUI powerUI;
@@ -26,15 +25,13 @@ public class PowerUpManager : MonoBehaviour
 
     private bool powerActive = false;
 
-    private Queue<CollectibleType> queuedPowers =
-        new Queue<CollectibleType>();
+    private Queue<CollectibleType> queuedPowers = new Queue<CollectibleType>();
 
     private PowerUpData activePower;
 
     void Start()
     {
         DisableAllPowerModels();
-
         UpdateVisualState();
     }
 
@@ -74,9 +71,11 @@ public class PowerUpManager : MonoBehaviour
             }
         }
 
+        // Updated call: passes 'currentType' to the UI to compare against the previous type
         powerUI.ShowCollect(
             GetPowerData(currentType).iconSprite,
-            currentCount
+            currentCount,
+            currentType
         );
 
         // GOT 3
@@ -89,9 +88,7 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    void HandleCollectionWhilePowered(
-        CollectibleType type
-    )
+    void HandleCollectionWhilePowered(CollectibleType type)
     {
         if (!hasCollectedAnything)
         {
@@ -112,9 +109,11 @@ public class PowerUpManager : MonoBehaviour
             }
         }
 
+        // Updated call: passes 'currentType' to the UI to compare against the previous type
         powerUI.ShowCollect(
             GetPowerData(currentType).iconSprite,
-            currentCount
+            currentCount,
+            currentType
         );
 
         if (currentCount >= 3)
@@ -128,17 +127,14 @@ public class PowerUpManager : MonoBehaviour
 
     void ActivatePower(CollectibleType type)
     {
-        PowerUpData data =
-            GetPowerData(type);
+        PowerUpData data = GetPowerData(type);
 
         if (data == null)
             return;
 
         activePower = data;
 
-        StartCoroutine(
-            PowerRoutine(data)
-        );
+        StartCoroutine(PowerRoutine(data));
     }
 
     IEnumerator PowerRoutine(PowerUpData data)
@@ -147,9 +143,7 @@ public class PowerUpManager : MonoBehaviour
 
         UpdateVisualState();
 
-        yield return new WaitForSeconds(
-            data.duration
-        );
+        yield return new WaitForSeconds(data.duration);
 
         powerActive = false;
 
@@ -160,8 +154,7 @@ public class PowerUpManager : MonoBehaviour
         // CHECK QUEUE
         if (queuedPowers.Count > 0)
         {
-            CollectibleType queued =
-                queuedPowers.Dequeue();
+            CollectibleType queued = queuedPowers.Dequeue();
 
             ActivatePower(queued);
         }
@@ -216,9 +209,7 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    PowerUpData GetPowerData(
-        CollectibleType type
-    )
+    PowerUpData GetPowerData(CollectibleType type)
     {
         foreach (PowerUpData p in powerUps)
         {
