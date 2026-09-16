@@ -28865,7 +28865,7 @@ MonoBehaviour:
   spawnAnchor: {fileID: 1562501407}
   stackOffsetX: 160
   stackOffsetY: -20
-  defaultColor: {r: 0.9098039, g: 0.8352941, b: 0.9490196, a: 1}
+  defaultColor: {r: 0.86415094, g: 0.7174003, b: 0.16793872, a: 1}
   closeShaveColor: {r: 0.9098039, g: 0.8352941, b: 0.9490196, a: 1}
   powerUpColor: {r: 0.9098039, g: 0.8352941, b: 0.9490196, a: 1}
 --- !u!114 &1562501409

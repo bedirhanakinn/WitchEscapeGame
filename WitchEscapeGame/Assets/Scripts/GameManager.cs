@@ -196,6 +196,7 @@ public class GameManager : MonoBehaviour
     public void QuitRun()
     {
         Time.timeScale = 1f;
+        if (ReviveController.Instance != null) ReviveController.Instance.ResetForNewRun();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
