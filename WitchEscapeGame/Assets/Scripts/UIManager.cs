@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
         Shop,
         Settings,
         Credits,
+        Tutorial,   // Added Tutorial menu ID
         Pause,      // Opened mid-run via the pause button
         GameOver
     }
