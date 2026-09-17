@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Unity.Services.LevelPlay; // LevelPlay (Ads Mediation) 8.6.0+ namespace.
-                                 // NOTE: verify this namespace against your installed
-                                 // package — older docs use `using com.unity3d.mediation;`.
+                                // NOTE: verify this namespace against your installed
+                                // package — older docs use `using com.unity3d.mediation;`.
 
 /// <summary>
 /// Real ad provider backed by Unity LevelPlay (formerly Unity Ads + ironSource).
@@ -42,6 +42,13 @@ public class LevelPlayRewardedAdProvider : MonoBehaviour, IRewardedAdProvider
     private LevelPlayRewardedAd _rewardedAd;
     private bool _initialized;
 
+    // Guards against calling _rewardedAd.LoadAd() while a previous load request
+    // hasn't resolved yet. Without this, ResetForNewRun() (fired on Retry) and
+    // the RetryLoad() coroutine (fired 4s after a failed load) can overlap and
+    // trip LevelPlayAdError 627 "Load is already called" — which then gets
+    // permanently stuck until the app process is killed and restarted.
+    private bool _isLoadInFlight;
+
     // Per-show state
     private Action _onRewardGranted;
     private Action _onClosedWithoutReward;
@@ -61,6 +68,15 @@ public class LevelPlayRewardedAdProvider : MonoBehaviour, IRewardedAdProvider
             // Not ready to load yet; init flow will trigger the first load itself.
             return;
         }
+
+        if (_isLoadInFlight)
+        {
+            // A load is already outstanding — don't stack another request on
+            // top of it, that's what was causing the permanent 627 error.
+            return;
+        }
+
+        _isLoadInFlight = true;
         _rewardedAd.LoadAd();
     }
 
@@ -132,15 +148,16 @@ public class LevelPlayRewardedAdProvider : MonoBehaviour, IRewardedAdProvider
 #endif
 
         _rewardedAd = new LevelPlayRewardedAd(adUnitId);
-        _rewardedAd.OnAdLoaded      += HandleAdLoaded;
-        _rewardedAd.OnAdLoadFailed  += HandleAdLoadFailed;
-        _rewardedAd.OnAdDisplayed   += HandleAdDisplayed;
+        _rewardedAd.OnAdLoaded += HandleAdLoaded;
+        _rewardedAd.OnAdLoadFailed += HandleAdLoadFailed;
+        _rewardedAd.OnAdDisplayed += HandleAdDisplayed;
         _rewardedAd.OnAdDisplayFailed += HandleAdDisplayFailed;
-        _rewardedAd.OnAdRewarded    += HandleAdRewarded;
-        _rewardedAd.OnAdClicked     += HandleAdClicked;
-        _rewardedAd.OnAdClosed      += HandleAdClosed;
+        _rewardedAd.OnAdRewarded += HandleAdRewarded;
+        _rewardedAd.OnAdClicked += HandleAdClicked;
+        _rewardedAd.OnAdClosed += HandleAdClosed;
 
-        _rewardedAd.LoadAd(); // Pre-cache so there's no wait at the death screen.
+        LoadAd(); // Pre-cache so there's no wait at the death screen. Routed through
+                  // the guarded method instead of calling _rewardedAd.LoadAd() directly.
     }
 
     private void OnInitFailed(LevelPlayInitError error)
@@ -153,11 +170,13 @@ public class LevelPlayRewardedAdProvider : MonoBehaviour, IRewardedAdProvider
 
     private void HandleAdLoaded(LevelPlayAdInfo info)
     {
+        _isLoadInFlight = false;
         Debug.Log("[LevelPlay] Rewarded ad loaded.");
     }
 
     private void HandleAdLoadFailed(LevelPlayAdError error)
     {
+        _isLoadInFlight = false;
         Debug.LogWarning($"[LevelPlay] Load failed: {error}. Retrying in {loadRetrySeconds}s.");
         StartCoroutine(RetryLoad());
     }
@@ -232,13 +251,13 @@ public class LevelPlayRewardedAdProvider : MonoBehaviour, IRewardedAdProvider
 
         if (_rewardedAd != null)
         {
-            _rewardedAd.OnAdLoaded      -= HandleAdLoaded;
-            _rewardedAd.OnAdLoadFailed  -= HandleAdLoadFailed;
-            _rewardedAd.OnAdDisplayed   -= HandleAdDisplayed;
+            _rewardedAd.OnAdLoaded -= HandleAdLoaded;
+            _rewardedAd.OnAdLoadFailed -= HandleAdLoadFailed;
+            _rewardedAd.OnAdDisplayed -= HandleAdDisplayed;
             _rewardedAd.OnAdDisplayFailed -= HandleAdDisplayFailed;
-            _rewardedAd.OnAdRewarded    -= HandleAdRewarded;
-            _rewardedAd.OnAdClicked     -= HandleAdClicked;
-            _rewardedAd.OnAdClosed      -= HandleAdClosed;
+            _rewardedAd.OnAdRewarded -= HandleAdRewarded;
+            _rewardedAd.OnAdClicked -= HandleAdClicked;
+            _rewardedAd.OnAdClosed -= HandleAdClosed;
         }
     }
 }
